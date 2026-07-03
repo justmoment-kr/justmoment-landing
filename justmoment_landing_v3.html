@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>잠깐서봐 — 매일 아침 책 한 권의 핵심</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF8F4;
+    --ink: #1C1C1A;
+    --ink-light: #5A5A56;
+    --ink-muted: #9A9A94;
+    --amber: #C4710A;
+    --amber-bg: #FEF3E2;
+    --border: #E4E2DC;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(250, 248, 244, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 0 max(24px, calc((100% - 1100px) / 2));
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 17px; font-weight: 600;
+    color: var(--ink); text-decoration: none;
+    letter-spacing: -0.3px;
+  }
+  .nav-cta {
+    background: var(--ink);
+    color: var(--white);
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 13px; font-weight: 500;
+    text-decoration: none;
+    transition: opacity .2s;
+  }
+  .nav-cta:hover { opacity: .8; }
+
+  /* SECTIONS */
+  section { padding: 100px max(24px, calc((100% - 1100px) / 2)); }
+
+  /* HERO */
+  .hero {
+    padding-top: 160px;
+    padding-bottom: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -1px;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--amber);
+  }
+  .hero-desc {
+    font-size: 17px;
+    color: var(--ink-light);
+    line-height: 1.8;
+    margin-bottom: 36px;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-size: 15px; font-weight: 500;
+    text-decoration: none;
+    transition: opacity .2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { opacity: .8; }
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    padding: 14px 28px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    font-size: 15px; font-weight: 400;
+    text-decoration: none;
+    transition: border-color .2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--ink-light); }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .msg-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 22px;
+    position: relative;
+  }
+  .msg-card .day-badge {
+    font-size: 11px; font-weight: 500;
+    color: var(--amber);
+    background: var(--amber-bg);
+    padding: 3px 10px; border-radius: 100px;
+    display: inline-block; margin-bottom: 10px;
+  }
+  .msg-card .msg-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 15px; font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .msg-card .msg-body {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+  .msg-card .msg-footer {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--ink-muted);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .kakao-dot {
+    width: 8px; height: 8px;
+    background: #FEE500;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .msg-card.dim { opacity: .55; transform: scale(0.98); }
+
+  /* STATS */
+  .stats-bar {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 40px max(24px, calc((100% - 1100px) / 2));
+    display: flex; gap: 0;
+  }
+  .stat {
+    flex: 1;
+    text-align: center;
+    padding: 0 20px;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 36px; font-weight: 600;
+    color: var(--ink);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label { font-size: 13px; color: var(--ink-muted); }
+
+  /* HOW */
+  .how-header { text-align: center; margin-bottom: 60px; }
+  .section-eyebrow {
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .step {
+    background: var(--white);
+    padding: 40px 32px;
+    border: 1px solid var(--border);
+  }
+  .step:first-child { border-radius: 16px 0 0 16px; }
+  .step:last-child { border-radius: 0 16px 16px 0; }
+  .step-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 40px; font-weight: 600;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .step h3 {
+    font-size: 18px; font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .step p { font-size: 14px; color: var(--ink-light); line-height: 1.7; }
+
+  /* CONTENT */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .content-text h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+  .content-text p {
+    font-size: 15px;
+    color: var(--ink-light);
+    line-height: 1.8;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-size: 12px; font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--ink-light);
+  }
+  .book-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .book-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .book-icon {
+    width: 36px; height: 44px;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .book-item-title { font-size: 14px; font-weight: 500; color: var(--ink); }
+  .book-item-sub { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+
+  /* PRICING */
+  .pricing-header { text-align: center; margin-bottom: 50px; }
+
+  /* 얼리버드 히어로 카드 */
+  .earlybird-wrap {
+    max-width: 520px;
+    margin: 0 auto 40px;
+  }
+  .earlybird-card {
+    background: var(--ink);
+    border-radius: 24px;
+    padding: 44px 40px;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .earlybird-card::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: rgba(196,113,10,0.18);
+    border-radius: 50%;
+  }
+  .eb-tag {
+    display: inline-block;
+    background: var(--amber);
+    color: var(--white);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .eb-price-row {
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 6px;
+  }
+  .eb-price {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 52px; font-weight: 600;
+    line-height: 1;
+    color: var(--white);
+  }
+  .eb-price-unit { font-size: 18px; color: rgba(255,255,255,0.6); }
+  .eb-strikethrough {
+    font-size: 16px;
+    color: rgba(255,255,255,0.35);
+    text-decoration: line-through;
+  }
+  .eb-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 28px;
+  }
+  .eb-features { list-style: none; margin-bottom: 32px; }
+  .eb-features li {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .eb-features li:last-child { border-bottom: none; }
+  .eb-features li::before {
+    content: '✓';
+    color: var(--amber);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .eb-spots {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 20px;
+  }
+  .eb-spots-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .eb-spots-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--amber);
+    border-radius: 2px;
+  }
+  .eb-spots-label { font-size: 12px; color: rgba(255,255,255,0.45); white-space: nowrap; }
+  .eb-cta {
+    display: block; width: 100%;
+    background: var(--white);
+    color: var(--ink);
+    padding: 15px;
+    border-radius: 100px;
+    text-align: center;
+    font-size: 15px; font-weight: 600;
+    text-decoration: none;
+    transition: opacity .2s;
+  }
+  .eb-cta:hover { opacity: .85; }
+
+  /* 정규 플랜 (coming soon) */
+  .regular-plans {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .plan-card-dim {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 22px;
+    position: relative;
+    opacity: 0.55;
+  }
+  .plan-dim-badge {
+    position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+    background: var(--border);
+    color: var(--ink-muted);
+    font-size: 10px; font-weight: 500;
+    padding: 3px 12px; border-radius: 100px;
+    white-space: nowrap;
+  }
+  .plan-dim-label { font-size: 11px; color: var(--ink-muted); margin-bottom: 4px; }
+  .plan-dim-price {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 26px; font-weight: 600;
+    color: var(--ink-muted);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .plan-dim-price span { font-size: 13px; font-weight: 400; }
+  .plan-dim-sub { font-size: 11px; color: var(--ink-muted); }
+
+  /* 가격 섹션 안내 */
+  .pricing-note {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+
+
+  /* 신청 모달 */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(28,28,26,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-box {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 40px 36px;
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal-close {
+    position: absolute; top: 20px; right: 24px;
+    background: none; border: none;
+    font-size: 22px; color: var(--ink-muted);
+    cursor: pointer; line-height: 1;
+  }
+  .modal-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 22px; font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .modal-sub { font-size: 13px; color: var(--ink-muted); margin-bottom: 28px; }
+  .form-group { margin-bottom: 18px; }
+  .form-label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+  .form-input, .form-select {
+    width: 100%; padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px; font-family: inherit;
+    color: var(--ink); background: var(--white);
+    box-sizing: border-box;
+    transition: border-color .2s;
+    -webkit-appearance: none;
+  }
+  .form-input:focus, .form-select:focus { outline: none; border-color: var(--ink); }
+  .form-check { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 24px; }
+  .form-check input { margin-top: 2px; flex-shrink: 0; }
+  .form-check label { font-size: 12px; color: var(--ink-muted); line-height: 1.5; }
+  .modal-submit {
+    width: 100%; padding: 15px;
+    background: var(--ink); color: var(--white);
+    border: none; border-radius: 100px;
+    font-size: 15px; font-weight: 600;
+    cursor: pointer; font-family: inherit;
+    transition: opacity .2s;
+  }
+  .modal-submit:hover { opacity: .85; }
+  .modal-form.hidden { display: none; }
+  .modal-done { display: none; text-align: center; }
+  .modal-done.active { display: block; }
+  .done-icon { font-size: 48px; margin-bottom: 16px; }
+  .done-title { font-family: 'Noto Serif KR', serif; font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+  .done-sub { font-size: 14px; color: var(--ink-muted); margin-bottom: 24px; }
+  .done-bank { background: var(--cream); border-radius: 14px; padding: 20px 24px; text-align: left; margin-bottom: 16px; }
+  .done-bank p { font-size: 14px; line-height: 2.2; }
+  .done-note { font-size: 12px; color: var(--ink-muted); line-height: 1.6; }
+
+  /* CTA BANNER */
+  .cta-banner {
+    background: var(--ink);
+    color: var(--white);
+    text-align: center;
+    padding: 80px max(24px, calc((100% - 1100px) / 2));
+  }
+  .cta-banner h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(24px, 3vw, 40px);
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+  .cta-banner p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 36px;
+    font-weight: 300;
+  }
+  .btn-light {
+    background: var(--white);
+    color: var(--ink);
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-size: 15px; font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity .2s;
+  }
+  .btn-light:hover { opacity: .85; }
+
+  /* FOOTER */
+  footer {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    padding: 48px max(24px, calc((100% - 1100px) / 2));
+  }
+  .footer-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .footer-brand {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 18px; font-weight: 600;
+    color: var(--ink);
+  }
+  .footer-brand-sub {
+    font-size: 12px; color: var(--ink-muted);
+    margin-top: 4px;
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-size: 13px;
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--ink); }
+  .footer-biz {
+    font-size: 12px;
+    color: var(--ink-muted);
+    line-height: 1.9;
+  }
+  .footer-biz strong { color: var(--ink-light); font-weight: 500; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 100px; }
+    .hero-visual { display: none; }
+    .stats-bar { flex-wrap: wrap; }
+    .stat { min-width: 50%; border-right: none; border-bottom: 1px solid var(--border); }
+    .stat:last-child { border-bottom: none; }
+    .steps { grid-template-columns: 1fr; }
+    .step:first-child { border-radius: 16px 16px 0 0; }
+    .step:last-child { border-radius: 0 0 16px 16px; }
+    .content-grid { grid-template-columns: 1fr; }
+    .regular-plans { grid-template-columns: 1fr; }
+    .earlybird-card { padding: 32px 24px; }
+    .footer-top { flex-direction: column; gap: 20px; }
+  }
+</style>
+
+<!-- 신청 모달 -->
+<div class="modal-overlay" id="applyModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <!-- 입력 폼 -->
+    <div class="modal-form" id="applyForm">
+      <p class="modal-title">얼리버드 1기 신청</p>
+      <p class="modal-sub">선착순 10명 · 월 6,900원 · 30일 알림톡 구독</p>
+
+      <div class="form-group">
+        <label class="form-label">이름</label>
+        <input class="form-input" id="inputName" type="text" placeholder="홍길동">
+      </div>
+      <div class="form-group">
+        <label class="form-label">카카오톡 수신 전화번호</label>
+        <input class="form-input" id="inputPhone" type="tel" placeholder="01012345678 (하이픈 없이)">
+      </div>
+      <div class="form-group">
+        <label class="form-label">시작할 시리즈 선택</label>
+        <select class="form-select" id="inputSeries">
+          <option value="">선택해주세요</option>
+          <option value="부업시작">부업 시작 30일</option>
+          <option value="갓생루틴">갓생 루틴·생산성 30일</option>
+          <option value="직장인돈관리">직장인 돈 관리 30일</option>
+          <option value="직장인세테크">직장인 세테크 30일</option>
+          <option value="커리어성장">직장인 커리어 성장 30일</option>
+          <option value="인간관계">직장인 인간관계 30일</option>
+        </select>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" id="agreeCheck">
+        <label for="agreeCheck">환불 정책 및 서비스 이용약관에 동의합니다. 구독 시작 후 7일 이내 미발송분 일할 환불, 7일 초과 환불 불가.</label>
+      </div>
+      <button class="modal-submit" onclick="submitApply()">다음 → 결제 안내</button>
+    </div>
+
+    <!-- 완료 화면 -->
+    <div class="modal-done" id="applyDone">
+      <div class="done-icon">🎉</div>
+      <p class="done-title">구독 신청 완료!</p>
+      <p class="done-sub" id="doneSubText">카드 등록이 완료되었습니다.</p>
+      <div class="done-bank">
+        <p><strong>구독 시리즈</strong> &nbsp; <span id="doneSeries">-</span></p>
+        <p><strong>월 구독료</strong> &nbsp;&nbsp;&nbsp; 6,900원 (자동 결제)</p>
+        <p><strong>첫 발송일</strong> &nbsp;&nbsp;&nbsp; 익일 오전 7:30</p>
+        <p><strong>발송 채널</strong> &nbsp;&nbsp;&nbsp; 카카오 알림톡</p>
+      </div>
+      <p class="done-note">내일 아침 7:30부터 카카오톡으로 매일 발송됩니다.<br>문의: justmoment.kr@gmail.com</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://js.tosspayments.com/v1/payment"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">잠깐서봐</a>
+  <a href="#pricing" class="nav-cta">구독 시작하기</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">카카오 알림톡 구독 서비스</p>
+    <h1>책 한 권의 핵심,<br>매일 아침 <em>3분</em>으로</h1>
+    <p class="hero-desc">
+      읽고 싶지만 시간이 없는 당신을 위해.<br>
+      30일간, 매일 아침 카카오톡으로<br>
+      책의 핵심 인사이트를 전달합니다.
+    </p>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn-primary">얼리버드 구독하기</a>
+      <a href="#how" class="btn-secondary">어떻게 작동하나요?</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="msg-card">
+      <span class="day-badge">Day 07 · 손자병법</span>
+      <p class="msg-title">싸우지 않고 이기는 것이 최선이다</p>
+      <p class="msg-body">손자는 전쟁의 목적이 '파괴'가 아닌 '목적 달성'임을 강조합니다. 직장에서도 마찬가지. 설득과 협상으로 원하는 결과를 얻는 사람이 진짜 고수입니다.</p>
+      <div class="msg-footer">
+        <span class="kakao-dot"></span>
+        잠깐서봐 · 오전 7:30
+      </div>
+    </div>
+    <div class="msg-card dim">
+      <span class="day-badge">Day 08 · 손자병법</span>
+      <p class="msg-title">적을 알고 나를 알면 백전불태</p>
+      <p class="msg-body">상대방을 파악하기 전에 행동하는 것은 눈 감고 운전하는 것과 같습니다. 오늘은 중요한 미팅 전, 상대방을 먼저 연구해보세요.</p>
+      <div class="msg-footer">
+        <span class="kakao-dot"></span>
+        잠깐서봐 · 오전 7:30
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat-num">30</span>
+    <span class="stat-label">일간 매일 발송</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">3분</span>
+    <span class="stat-label">하루 읽기 분량</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">오전 7:30</span>
+    <span class="stat-label">카카오톡 수신 시간</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">9,900원</span>
+    <span class="stat-label">월 구독료</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="how-header">
+    <p class="section-eyebrow">How it works</p>
+    <h2 class="section-title">구독하면 알아서 옵니다</h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>구독 신청</h3>
+      <p>원하는 시리즈를 선택하고 구독을 시작합니다. 결제 후 바로 다음 날부터 발송이 시작됩니다.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>매일 아침 알림톡</h3>
+      <p>오전 7시 30분, 카카오톡으로 책의 핵심 인사이트가 도착합니다. 출근길 3분이면 충분합니다.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>30일 완독</h3>
+      <p>30일이 지나면 책 한 권을 완독한 셈. 생각하고, 적용하고, 성장하세요.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section>
+  <div class="content-grid">
+    <div class="content-text">
+      <p class="section-eyebrow">Content</p>
+      <h2>요약이 아닌<br>해석과 적용</h2>
+      <p>단순한 책 요약이 아닙니다. 핵심 개념을 실생활과 직장 생활에 어떻게 적용할지, 구체적인 인사이트로 재창작합니다.</p>
+      <div class="tag-list">
+        <span class="tag">직장인 돈 관리</span>
+        <span class="tag">부업 시작하기</span>
+        <span class="tag">손자병법</span>
+        <span class="tag">명상록</span>
+        <span class="tag">리더십</span>
+        <span class="tag">인간관계</span>
+        <span class="tag">커리어 성장</span>
+        <span class="tag">생산성</span>
+      </div>
+    </div>
+    <div class="book-list">
+      <div class="book-item">
+        <div class="book-icon" style="background:#FEF3E2;">📖</div>
+        <div>
+          <div class="book-item-title">직장인 돈 관리 30일</div>
+          <div class="book-item-sub">돈을 모으는 구조를 설계합니다</div>
+        </div>
+      </div>
+      <div class="book-item">
+        <div class="book-icon" style="background:#EEF2FF;">⚔️</div>
+        <div>
+          <div class="book-item-title">손자병법 30일</div>
+          <div class="book-item-sub">2,500년 전 전략이 오늘의 직장에서</div>
+        </div>
+      </div>
+      <div class="book-item">
+        <div class="book-icon" style="background:#F0FDF4;">🏛️</div>
+        <div>
+          <div class="book-item-title">명상록 30일</div>
+          <div class="book-item-sub">마르쿠스 아우렐리우스의 스토아 철학</div>
+        </div>
+      </div>
+      <div class="book-item">
+        <div class="book-icon" style="background:#FFF1F2;">🚀</div>
+        <div>
+          <div class="book-item-title">부업 시작 30일</div>
+          <div class="book-item-sub">퇴근 후 수입을 만드는 첫 걸음</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background: var(--white); margin: 0; padding-left: max(24px, calc((100% - 1100px) / 2)); padding-right: max(24px, calc((100% - 1100px) / 2));">
+  <div class="pricing-header">
+    <p class="section-eyebrow">Pricing</p>
+    <h2 class="section-title">지금이 가장 저렴합니다</h2>
+  </div>
+
+  <!-- 얼리버드 히어로 -->
+  <div class="earlybird-wrap">
+    <div class="earlybird-card">
+      <span class="eb-tag">얼리버드 1기 · 한정 오픈</span>
+      <div class="eb-price-row">
+        <span class="eb-price">6,900</span>
+        <span class="eb-price-unit">원/월</span>
+        <span class="eb-strikethrough">9,900원</span>
+      </div>
+      <p class="eb-sub">정가 대비 30% 할인 · 선착순 10명 마감 후 종료</p>
+      <ul class="eb-features">
+        <li>매일 아침 7:30 카카오 알림톡</li>
+        <li>30일 시리즈 1개 완독</li>
+        <li>완독 후 다음 시리즈 자유롭게 선택</li>
+        <li>얼리버드 전용 가격 영구 유지</li>
+      </ul>
+      <div class="eb-spots">
+        <div class="eb-spots-bar"><div class="eb-spots-fill"></div></div>
+        <span class="eb-spots-label">선착순 10명</span>
+      </div>
+      <button onclick="openModal()" class="eb-cta" style="border:none;cursor:pointer;width:100%;">얼리버드 신청하기 →</button>
+    </div>
+  </div>
+
+  <!-- 정규 플랜 (예고) -->
+  <div class="regular-plans">
+    <div class="plan-card-dim">
+      <span class="plan-dim-badge">정규 오픈 예정</span>
+      <p class="plan-dim-label">월간권</p>
+      <p class="plan-dim-price">9,900<span>원/월</span></p>
+      <p class="plan-dim-sub">얼리버드 마감 후 오픈</p>
+    </div>
+    <div class="plan-card-dim">
+      <span class="plan-dim-badge">정규 오픈 예정</span>
+      <p class="plan-dim-label">연간권</p>
+      <p class="plan-dim-price">99,000<span>원/년</span></p>
+      <p class="plan-dim-sub">월 8,250원 · 2개월 무료</p>
+    </div>
+  </div>
+  <p class="pricing-note">얼리버드 마감 후 정규 구독이 오픈됩니다.</p>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <h2>오늘부터 매일 아침이 달라집니다</h2>
+  <p>책 읽을 시간이 없어도 괜찮습니다. 잠깐서봐가 대신 읽어드립니다.</p>
+  <a href="#pricing" class="btn-light">지금 구독 시작하기 →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">잠깐서봐</div>
+      <div class="footer-brand-sub">justmoment.kr</div>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:justmoment.kr@gmail.com">문의하기</a>
+      <a href="#">이용약관</a>
+      <a href="#">개인정보처리방침</a>
+    </div>
+  </div>
+  <div class="footer-biz">
+    <strong>상호명</strong> 저스트모먼트 &nbsp;|&nbsp;
+    <strong>대표자</strong> 김태현 &nbsp;|&nbsp;
+    <strong>사업자등록번호</strong> 667-02-03691 &nbsp;|&nbsp;
+    <strong>통신판매업 신고번호</strong> 제2026-경기김포-3941호<br>
+    <strong>사업장 주소</strong> 경기도 김포시 김포한강9로 79, 4층 401-473A호 (에어오피스 김포점)<br>
+    <strong>고객센터</strong> 070-8998-1201 &nbsp;|&nbsp;
+    <strong>이메일</strong> justmoment.kr@gmail.com<br>
+    <br>
+    <strong style="color:var(--ink-light);">환불 정책</strong><br>
+    구독 시작 전: 전액 환불 &nbsp;·&nbsp;
+    구독 시작 후 7일 이내: 미발송 일수 기준 일할 환불 &nbsp;·&nbsp;
+    구독 시작 후 7일 초과: 환불 불가 (전자상거래법 제17조 디지털 콘텐츠 예외)<br>
+    환불 문의: justmoment.kr@gmail.com<br>
+    <br>
+    © 2026 저스트모먼트. All rights reserved.
+  </div>
+</footer>
+
+<script>
+
+  function openModal() {
+    document.getElementById('applyModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('applyModal').classList.remove('active');
+    document.body.style.overflow = '';
+    // 폼 초기화
+    document.getElementById('applyForm').classList.remove('hidden');
+    document.getElementById('applyDone').classList.remove('active');
+  }
+  async function submitApply() {
+    const name = document.getElementById('inputName').value.trim();
+    const phone = document.getElementById('inputPhone').value.trim();
+    const series = document.getElementById('inputSeries').value;
+    const agree = document.getElementById('agreeCheck').checked;
+    if (!name) { alert('이름을 입력해주세요.'); return; }
+    if (!phone || !/^01[0-9]{8,9}$/.test(phone)) { alert('전화번호를 올바르게 입력해주세요. (예: 01012345678)'); return; }
+    if (!series) { alert('시리즈를 선택해주세요.'); return; }
+    if (!agree) { alert('환불 정책에 동의해주세요.'); return; }
+
+    // 입력 정보 임시 저장
+    sessionStorage.setItem('jm_name', name);
+    sessionStorage.setItem('jm_phone', phone);
+    sessionStorage.setItem('jm_series', series);
+    const customerKey = 'jm_' + Date.now();
+    sessionStorage.setItem('jm_customerKey', customerKey);
+
+    try {
+      const tossPayments = TossPayments(CLIENT_KEY);
+      await tossPayments.requestBillingAuth('카드', {
+        customerKey: customerKey,
+        successUrl: window.location.origin + window.location.pathname + '?status=success',
+        failUrl: window.location.origin + window.location.pathname + '?status=fail',
+      });
+    } catch (err) {
+      if (err.code === 'USER_CANCEL') return;
+      alert('오류가 발생했습니다. 문의: justmoment.kr@gmail.com');
+    }
+  }
+  // 오버레이 클릭 시 닫기
+  document.getElementById('applyModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  const CLIENT_KEY = 'test_ck_EP59LybZ8BdWdpNwyN4nV6GYo7pR';
+
+  async function requestPayment() {
+    const tossPayments = TossPayments(CLIENT_KEY);
+
+    const customerKey = 'jm-' + Date.now();
+
+    try {
+      await tossPayments.requestBillingAuth('카드', {
+        customerKey: customerKey,
+        successUrl: window.location.origin + '?status=success&customerKey=' + customerKey,
+        failUrl: window.location.origin + '?status=fail',
+      });
+    } catch (err) {
+      if (err.code === 'USER_CANCEL') return;
+      alert('오류가 발생했습니다. 문의: justmoment.kr@gmail.com');
+    }
+  }
+
+  // 카드 등록 완료 후 안내
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get('status');
+    if (status === 'success') {
+      alert('신청이 완료되었습니다! 📩\n내일 아침 7:30부터 카카오톡으로 발송이 시작됩니다.\n\n문의: justmoment.kr@gmail.com');
+    } else if (status === 'fail') {
+      alert('결제가 취소되었습니다.\n다시 시도하시거나 문의해 주세요.');
+    }
+  });
+</script>
+</body>
+</html>
