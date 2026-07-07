@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>잠깐서봐 — 매일 아침 책 한 권의 핵심</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF8F4;
+    --ink: #1C1C1A;
+    --ink-light: #5A5A56;
+    --ink-muted: #9A9A94;
+    --amber: #C4710A;
+    --amber-bg: #FEF3E2;
+    --border: #E4E2DC;
+    --white: #FFFFFF;
+    --sold: #B8B4AA;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(250, 248, 244, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 0 max(24px, calc((100% - 1100px) / 2));
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 17px; font-weight: 600;
+    color: var(--ink); text-decoration: none;
+    letter-spacing: -0.3px;
+  }
+  .nav-cta {
+    background: var(--ink);
+    color: var(--white);
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 13px; font-weight: 500;
+    text-decoration: none;
+    transition: opacity .2s;
+  }
+  .nav-cta:hover { opacity: .8; }
+
+  /* SECTIONS */
+  section { padding: 100px max(24px, calc((100% - 1100px) / 2)); }
+
+  /* HERO */
+  .hero {
+    padding-top: 160px;
+    padding-bottom: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -1px;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--amber);
+  }
+  .hero-desc {
+    font-size: 17px;
+    color: var(--ink-light);
+    line-height: 1.8;
+    margin-bottom: 36px;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-size: 15px; font-weight: 500;
+    text-decoration: none;
+    transition: opacity .2s;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-primary:hover { opacity: .8; }
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    padding: 14px 28px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    font-size: 15px; font-weight: 400;
+    text-decoration: none;
+    transition: border-color .2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--ink-light); }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .msg-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 22px;
+    position: relative;
+  }
+  .msg-card .day-badge {
+    font-size: 11px; font-weight: 500;
+    color: var(--amber);
+    background: var(--amber-bg);
+    padding: 3px 10px; border-radius: 100px;
+    display: inline-block; margin-bottom: 10px;
+  }
+  .msg-card .msg-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 15px; font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .msg-card .msg-body {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+  .msg-card .msg-footer {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--ink-muted);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .kakao-dot {
+    width: 8px; height: 8px;
+    background: #FEE500;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .msg-card.dim { opacity: .55; transform: scale(0.98); }
+
+  /* STATS */
+  .stats-bar {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 40px max(24px, calc((100% - 1100px) / 2));
+    display: flex; gap: 0;
+  }
+  .stat {
+    flex: 1;
+    text-align: center;
+    padding: 0 20px;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 36px; font-weight: 600;
+    color: var(--ink);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label { font-size: 13px; color: var(--ink-muted); }
+
+  /* HOW */
+  .how-header { text-align: center; margin-bottom: 60px; }
+  .section-eyebrow {
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .step {
+    background: var(--white);
+    padding: 40px 32px;
+    border: 1px solid var(--border);
+  }
+  .step:first-child { border-radius: 16px 0 0 16px; }
+  .step:last-child { border-radius: 0 16px 16px 0; }
+  .step-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 40px; font-weight: 600;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .step h3 {
+    font-size: 18px; font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .step p { font-size: 14px; color: var(--ink-light); line-height: 1.7; }
+
+  /* CONTENT */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .content-text h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+  .content-text p {
+    font-size: 15px;
+    color: var(--ink-light);
+    line-height: 1.8;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-size: 12px; font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--ink-light);
+  }
+  .book-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .book-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .book-icon {
+    width: 36px; height: 44px;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .book-item-title { font-size: 14px; font-weight: 500; color: var(--ink); }
+  .book-item-sub { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+
+  /* PRICING — 4 plans */
+  .pricing-header { text-align: center; margin-bottom: 50px; }
+
+  .plan-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  @media (max-width: 980px) { .plan-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .plan-grid { grid-template-columns: 1fr; } }
+
+  .plan-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 0 0 28px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform .2s ease;
+  }
+  .plan-card:hover { transform: translateY(-3px); }
+
+  .plan-card.is-hero {
+    background: var(--ink);
+    color: var(--white);
+    border: none;
+  }
+  .plan-card.is-hero::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: rgba(196,113,10,0.18);
+    border-radius: 50%;
+  }
+
+  .plan-seat-bar {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .plan-card.is-hero .plan-seat-bar { border-bottom-color: rgba(255,255,255,0.1); }
+  .plan-seat-top {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; margin-bottom: 8px;
+  }
+  .plan-seat-label { color: var(--ink-muted); }
+  .plan-card.is-hero .plan-seat-label { color: rgba(255,255,255,0.5); }
+  .plan-seat-count { font-family: 'Noto Serif KR', serif; font-weight: 600; color: var(--ink); }
+  .plan-card.is-hero .plan-seat-count { color: var(--white); }
+  .plan-seat-track {
+    height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;
+  }
+  .plan-card.is-hero .plan-seat-track { background: rgba(255,255,255,0.15); }
+  .plan-seat-fill {
+    height: 100%; width: 0%; background: var(--amber); border-radius: 2px;
+    transition: width .6s ease;
+  }
+  .plan-seat-badge {
+    display: inline-block;
+    font-size: 11px; font-weight: 500;
+    color: var(--ink-muted);
+    letter-spacing: .5px;
+  }
+
+  .plan-body { padding: 24px 24px 0; flex: 1; display: flex; flex-direction: column; }
+  .plan-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .5px; text-transform: uppercase;
+    color: var(--amber);
+    background: var(--amber-bg);
+    padding: 3px 12px; border-radius: 100px;
+    margin-bottom: 14px;
+    width: fit-content;
+  }
+  .plan-card.is-hero .plan-tag { background: var(--amber); color: var(--white); }
+
+  .plan-price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+  .plan-price {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 32px; font-weight: 600; line-height: 1;
+  }
+  .plan-price-unit { font-size: 13px; color: var(--ink-muted); }
+  .plan-card.is-hero .plan-price-unit { color: rgba(255,255,255,0.6); }
+  .plan-sub { font-size: 12.5px; color: var(--ink-muted); margin-bottom: 22px; }
+  .plan-card.is-hero .plan-sub { color: rgba(255,255,255,0.55); }
+
+  .plan-features { list-style: none; margin-bottom: 24px; }
+  .plan-features li {
+    font-size: 13px; color: var(--ink-light);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .plan-card.is-hero .plan-features li {
+    color: rgba(255,255,255,0.8);
+    border-bottom-color: rgba(255,255,255,0.1);
+  }
+  .plan-features li:last-child { border-bottom: none; }
+  .plan-features li::before { content: '✓'; color: var(--amber); font-weight: 700; flex-shrink: 0; }
+
+  .plan-cta {
+    display: block; width: 100%;
+    background: var(--ink); color: var(--white);
+    padding: 14px; border: none; border-radius: 100px;
+    text-align: center; font-size: 14.5px; font-weight: 600;
+    cursor: pointer; font-family: inherit;
+    transition: opacity .2s;
+  }
+  .plan-card.is-hero .plan-cta { background: var(--white); color: var(--ink); }
+  .plan-cta:hover:not(:disabled) { opacity: .85; }
+  .plan-cta:disabled { cursor: not-allowed; opacity: .6; }
+
+  .plan-card.is-soldout { opacity: .55; }
+  .plan-card.is-soldout .plan-seat-fill { background: var(--sold); }
+  .plan-card.is-soldout::after {
+    content: '마감';
+    position: absolute; top: 16px; right: 16px; z-index: 2;
+    background: var(--white); color: var(--sold);
+    font-size: 10px; font-weight: 700;
+    padding: 3px 10px; border-radius: 100px;
+  }
+
+  .seat-skeleton { opacity: .4; }
+
+  .pricing-note { text-align: center; margin-top: 28px; font-size: 12px; color: var(--ink-muted); }
+
+  /* CTA BANNER */
+  .cta-banner {
+    background: var(--ink);
+    color: var(--white);
+    text-align: center;
+    padding: 80px max(24px, calc((100% - 1100px) / 2));
+  }
+  .cta-banner h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(24px, 3vw, 40px);
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+  .cta-banner p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 36px;
+    font-weight: 300;
+  }
+  .btn-light {
+    background: var(--white);
+    color: var(--ink);
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-size: 15px; font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity .2s;
+  }
+  .btn-light:hover { opacity: .85; }
+
+  /* FOOTER */
+  footer {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    padding: 48px max(24px, calc((100% - 1100px) / 2));
+  }
+  .footer-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .footer-brand {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 18px; font-weight: 600;
+    color: var(--ink);
+  }
+  .footer-brand-sub {
+    font-size: 12px; color: var(--ink-muted);
+    margin-top: 4px;
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-size: 13px;
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--ink); }
+  .footer-biz {
+    font-size: 12px;
+    color: var(--ink-muted);
+    line-height: 1.9;
+  }
+  .footer-biz strong { color: var(--ink-light); font-weight: 500; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 100px; }
+    .hero-visual { display: none; }
+    .stats-bar { flex-wrap: wrap; }
+    .stat { min-width: 50%; border-right: none; border-bottom: 1px solid var(--border); }
+    .stat:last-child { border-bottom: none; }
+    .steps { grid-template-columns: 1fr; }
+    .step:first-child { border-radius: 16px 16px 0 0; }
+    .step:last-child { border-radius: 0 0 16px 16px; }
+    .content-grid { grid-template-columns: 1fr; }
+    .footer-top { flex-direction: column; gap: 20px; }
+  }
+
+  /* 신청 모달 */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(28,28,26,0.65);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-box {
+    background: var(--white); border-radius: 24px;
+    padding: 40px 36px; width: 100%; max-width: 480px;
+    position: relative; max-height: 90vh; overflow-y: auto;
+  }
+  .modal-close {
+    position: absolute; top: 20px; right: 24px;
+    background: none; border: none; font-size: 22px;
+    color: var(--ink-muted); cursor: pointer;
+  }
+  .modal-title { font-family: 'Noto Serif KR', serif; font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+  .modal-sub { font-size: 13px; color: var(--ink-muted); margin-bottom: 28px; }
+  .form-group { margin-bottom: 18px; }
+  .form-label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+  .form-input, .form-select {
+    width: 100%; padding: 12px 14px;
+    border: 1px solid var(--border); border-radius: 10px;
+    font-size: 14px; font-family: inherit; color: var(--ink);
+    background: var(--white); box-sizing: border-box; -webkit-appearance: none;
+  }
+  .form-input:focus, .form-select:focus { outline: none; border-color: var(--ink); }
+  .form-check { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 24px; }
+  .form-check input { margin-top: 3px; flex-shrink: 0; }
+  .form-check label { font-size: 12px; color: var(--ink-muted); line-height: 1.6; }
+  .modal-submit {
+    width: 100%; padding: 15px; background: var(--ink); color: var(--white);
+    border: none; border-radius: 100px; font-size: 15px; font-weight: 600;
+    cursor: pointer; font-family: inherit;
+  }
+  .modal-submit:disabled { opacity: .6; cursor: not-allowed; }
+  .modal-form.hidden { display: none; }
+  .modal-done { display: none; text-align: center; }
+  .modal-done.active { display: block; }
+  .modal-loading { display: none; text-align: center; padding: 40px 0; }
+  .modal-loading.active { display: block; }
+  .modal-fail { display: none; text-align: center; }
+  .modal-fail.active { display: block; }
+  .done-icon { font-size: 48px; margin-bottom: 16px; }
+  .done-title { font-family: 'Noto Serif KR', serif; font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+  .done-sub { font-size: 14px; color: var(--ink-muted); margin-bottom: 24px; }
+  .done-bank { background: var(--cream); border-radius: 14px; padding: 20px 24px; text-align: left; margin-bottom: 16px; }
+  .done-bank p { font-size: 14px; line-height: 2.4; }
+  .done-note { font-size: 12px; color: var(--ink-muted); line-height: 1.6; }
+  .loading-spinner {
+    width: 36px; height: 36px; margin: 0 auto 20px;
+    border: 3px solid var(--border); border-top-color: var(--amber);
+    border-radius: 50%; animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+<script src="https://js.tosspayments.com/v1/payment"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">잠깐서봐</a>
+  <a href="#pricing" class="nav-cta">구독 시작하기</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">카카오 알림톡 구독 서비스</p>
+    <h1>책 한 권의 핵심,<br>매일 아침 <em>3분</em>으로</h1>
+    <p class="hero-desc">
+      읽고 싶지만 시간이 없는 당신을 위해.<br>
+      30일간, 매일 아침 카카오톡으로<br>
+      책의 핵심 인사이트를 전달합니다.
+    </p>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn-primary" style="text-decoration:none;">구독 시작하기</a>
+      <a href="#how" class="btn-secondary">어떻게 작동하나요?</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="msg-card">
+      <span class="day-badge">Day 07 · 손자병법</span>
+      <p class="msg-title">싸우지 않고 이기는 것이 최선이다</p>
+      <p class="msg-body">손자는 전쟁의 목적이 '파괴'가 아닌 '목적 달성'임을 강조합니다. 직장에서도 마찬가지. 설득과 협상으로 원하는 결과를 얻는 사람이 진짜 고수입니다.</p>
+      <div class="msg-footer">
+        <span class="kakao-dot"></span>
+        잠깐서봐 · 오전 7:30
+      </div>
+    </div>
+    <div class="msg-card dim">
+      <span class="day-badge">Day 08 · 손자병법</span>
+      <p class="msg-title">적을 알고 나를 알면 백전불태</p>
+      <p class="msg-body">상대방을 파악하기 전에 행동하는 것은 눈 감고 운전하는 것과 같습니다. 오늘은 중요한 미팅 전, 상대방을 먼저 연구해보세요.</p>
+      <div class="msg-footer">
+        <span class="kakao-dot"></span>
+        잠깐서봐 · 오전 7:30
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat-num">30</span>
+    <span class="stat-label">일간 매일 발송</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">3분</span>
+    <span class="stat-label">하루 읽기 분량</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">오전 7:30</span>
+    <span class="stat-label">카카오톡 수신 시간</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">6,900원</span>
+    <span class="stat-label">얼리버드 구독료</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="how-header">
+    <p class="section-eyebrow">How it works</p>
+    <h2 class="section-title">구독하면 알아서 옵니다</h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>구독 신청</h3>
+      <p>원하는 시리즈를 선택하고 구독을 시작합니다. 결제 후 바로 다음 날부터 발송이 시작됩니다.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>매일 아침 알림톡</h3>
+      <p>오전 7시 30분, 카카오톡으로 책의 핵심 인사이트가 도착합니다. 출근길 3분이면 충분합니다.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>30일 완독</h3>
+      <p>30일이 지나면 책 한 권을 완독한 셈. 생각하고, 적용하고, 성장하세요.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section>
+  <div class="content-grid">
+    <div class="content-text">
+      <p class="section-eyebrow">Content</p>
+      <h2>요약이 아닌<br>해석과 적용</h2>
+      <p>단순한 책 요약이 아닙니다. 핵심 개념을 실생활과 직장 생활에 어떻게 적용할지, 구체적인 인사이트로 재창작합니다.</p>
+      <div class="tag-list">
+        <span class="tag">직장인 돈 관리</span>
+        <span class="tag">부업 시작하기</span>
+        <span class="tag">갓생 루틴</span>
+        <span class="tag">커리어 성장</span>
+        <span class="tag">인간관계</span>
+      </div>
+    </div>
+    <div class="book-list">
+      <div class="book-item">
+        <div class="book-icon" style="background:#FEF3E2;">📖</div>
+        <div>
+          <div class="book-item-title">직장인 돈 관리 30일</div>
+          <div class="book-item-sub">돈을 모으는 구조를 설계합니다</div>
+        </div>
+      </div>
+      <div class="book-item">
+        <div class="book-icon" style="background:#FFF1F2;">🚀</div>
+        <div>
+          <div class="book-item-title">부업 시작 30일</div>
+          <div class="book-item-sub">퇴근 후 수입을 만드는 첫 걸음</div>
+        </div>
+      </div>
+      <div class="book-item">
+        <div class="book-icon" style="background:#EEF2FF;">☀️</div>
+        <div>
+          <div class="book-item-title">갓생 루틴·생산성 30일</div>
+          <div class="book-item-sub">아침이 바뀌면 하루가 바뀝니다</div>
+        </div>
+      </div>
+      <div class="book-item">
+        <div class="book-icon" style="background:#F0FDF4;">🧭</div>
+        <div>
+          <div class="book-item-title">직장인 커리어 성장 30일</div>
+          <div class="book-item-sub">다음 단계로 가는 구체적 방법</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background: var(--white); margin: 0; padding-left: max(24px, calc((100% - 1100px) / 2)); padding-right: max(24px, calc((100% - 1100px) / 2));">
+  <div class="pricing-header">
+    <p class="section-eyebrow">Pricing</p>
+    <h2 class="section-title">지금, 나에게 맞는 방식으로<br>시작하세요</h2>
+  </div>
+
+  <div class="plan-grid">
+
+    <!-- 얼리버드 1기 -->
+    <div class="plan-card is-hero" data-plan="early1" data-price="6900" data-label="얼리버드 1기">
+      <div class="plan-seat-bar">
+        <div class="plan-seat-top">
+          <span class="plan-seat-label">선착순 10명</span>
+          <span class="plan-seat-count seat-remaining seat-skeleton">–/10</span>
+        </div>
+        <div class="plan-seat-track"><div class="plan-seat-fill"></div></div>
+      </div>
+      <div class="plan-body">
+        <span class="plan-tag">얼리버드 1기</span>
+        <div class="plan-price-row">
+          <span class="plan-price">6,900원</span>
+          <span class="plan-price-unit">/월</span>
+        </div>
+        <p class="plan-sub">정가 대비 30% 할인 · 가장 먼저 마감</p>
+        <ul class="plan-features">
+          <li>매일 아침 7:30 카카오 알림톡</li>
+          <li>30일 시리즈 1개 완독</li>
+          <li>얼리버드 전용 가격 영구 유지</li>
+        </ul>
+        <button class="plan-cta" data-open-modal>얼리버드 1기 신청하기</button>
+      </div>
+    </div>
+
+    <!-- 얼리버드 2기 -->
+    <div class="plan-card" data-plan="early2" data-price="7900" data-label="얼리버드 2기">
+      <div class="plan-seat-bar">
+        <div class="plan-seat-top">
+          <span class="plan-seat-label">선착순 20명</span>
+          <span class="plan-seat-count seat-remaining seat-skeleton">–/20</span>
+        </div>
+        <div class="plan-seat-track"><div class="plan-seat-fill"></div></div>
+      </div>
+      <div class="plan-body">
+        <span class="plan-tag">얼리버드 2기</span>
+        <div class="plan-price-row">
+          <span class="plan-price">7,900원</span>
+          <span class="plan-price-unit">/월</span>
+        </div>
+        <p class="plan-sub">정가 대비 20% 할인</p>
+        <ul class="plan-features">
+          <li>매일 아침 7:30 카카오 알림톡</li>
+          <li>30일 시리즈 1개 완독</li>
+          <li>얼리버드 전용 가격 영구 유지</li>
+        </ul>
+        <button class="plan-cta" data-open-modal>얼리버드 2기 신청하기</button>
+      </div>
+    </div>
+
+    <!-- 월간 정가 -->
+    <div class="plan-card" data-plan="monthly" data-price="9900" data-label="월간 정가">
+      <div class="plan-seat-bar">
+        <div class="plan-seat-top">
+          <span class="plan-seat-badge">상시 오픈</span>
+          <span style="font-size:12px; color: var(--ink-muted);">인원 제한 없음</span>
+        </div>
+      </div>
+      <div class="plan-body">
+        <span class="plan-tag">월간 정가</span>
+        <div class="plan-price-row">
+          <span class="plan-price">9,900원</span>
+          <span class="plan-price-unit">/월</span>
+        </div>
+        <p class="plan-sub">언제든 시작 가능</p>
+        <ul class="plan-features">
+          <li>매일 아침 7:30 카카오 알림톡</li>
+          <li>30일 시리즈 1개 완독</li>
+          <li>완독 후 다음 시리즈 자유 선택</li>
+        </ul>
+        <button class="plan-cta" data-open-modal>월간 구독 시작하기</button>
+      </div>
+    </div>
+
+    <!-- 연간권 -->
+    <div class="plan-card" data-plan="yearly" data-price="99000" data-label="연간권">
+      <div class="plan-seat-bar">
+        <div class="plan-seat-top">
+          <span class="plan-seat-badge">상시 오픈</span>
+          <span style="font-size:12px; color: var(--ink-muted);">2개월 무료</span>
+        </div>
+      </div>
+      <div class="plan-body">
+        <span class="plan-tag">연간권</span>
+        <div class="plan-price-row">
+          <span class="plan-price">99,000원</span>
+          <span class="plan-price-unit">/년</span>
+        </div>
+        <p class="plan-sub">월 8,250원 · 2개월 무료</p>
+        <ul class="plan-features">
+          <li>매일 아침 7:30 카카오 알림톡</li>
+          <li>30일 시리즈 12개 완독</li>
+          <li>가장 합리적인 가격</li>
+        </ul>
+        <button class="plan-cta" data-open-modal>연간권 시작하기</button>
+      </div>
+    </div>
+
+  </div>
+  <p class="pricing-note">얼리버드는 선착순 마감이 있습니다. 월간·연간은 언제든 시작할 수 있어요.</p>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <h2>오늘부터 매일 아침이 달라집니다</h2>
+  <p>책 읽을 시간이 없어도 괜찮습니다. 잠깐서봐가 대신 읽어드립니다.</p>
+  <a href="#pricing" class="btn-light">지금 구독 시작하기 →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">잠깐서봐</div>
+      <div class="footer-brand-sub">justmoment.kr</div>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:justmoment.lr@gmail.com">문의하기</a>
+      <a href="#">이용약관</a>
+      <a href="#">개인정보처리방침</a>
+    </div>
+  </div>
+  <div class="footer-biz">
+    <strong>상호명</strong> 저스트모먼트 &nbsp;|&nbsp;
+    <strong>대표자</strong> 김태현 &nbsp;|&nbsp;
+    <strong>사업자등록번호</strong> 667-02-03691 &nbsp;|&nbsp;
+    <strong>통신판매업 신고번호</strong> 제2026-경기김포-3941호<br>
+    <strong>사업장 주소</strong> 경기도 김포시 김포한강9로 79, 4층 401-473A호 (에어오피스 김포점)<br>
+    <strong>고객센터</strong> 070-8998-1201 &nbsp;|&nbsp;
+    <strong>이메일</strong> justmoment.lr@gmail.com<br>
+    <br>
+    <strong style="color:var(--ink-light);">환불 정책</strong><br>
+    구독 시작 전: 전액 환불 &nbsp;·&nbsp;
+    구독 시작 후 7일 이내: 미발송 일수 기준 일할 환불 &nbsp;·&nbsp;
+    구독 시작 후 7일 초과: 환불 불가 (전자상거래법 제17조 디지털 콘텐츠 예외)<br>
+    환불 문의: justmoment.lr@gmail.com<br>
+    <br>
+    © 2026 저스트모먼트. All rights reserved.
+  </div>
+</footer>
+
+<!-- 신청 모달 -->
+<div class="modal-overlay" id="applyModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <!-- 1. 입력 폼 -->
+    <div class="modal-form" id="applyForm">
+      <p class="modal-title" id="modalTitle">얼리버드 1기 신청</p>
+      <p class="modal-sub" id="modalSub">선착순 10명 · 월 6,900원 · 30일 알림톡 구독</p>
+      <div class="form-group">
+        <label class="form-label">이름</label>
+        <input class="form-input" id="inputName" type="text" placeholder="홍길동">
+      </div>
+      <div class="form-group">
+        <label class="form-label">카카오톡 수신 전화번호</label>
+        <input class="form-input" id="inputPhone" type="tel" placeholder="01012345678 (하이픈 없이)">
+      </div>
+      <div class="form-group">
+        <label class="form-label">시작할 시리즈 선택</label>
+        <select class="form-select" id="inputSeries">
+          <option value="">선택해주세요</option>
+          <option value="부업시작">부업 시작 30일</option>
+          <option value="갓생루틴">갓생 루틴·생산성 30일</option>
+          <option value="직장인돈관리">직장인 돈 관리 30일</option>
+          <option value="커리어성장">직장인 커리어 성장 30일</option>
+          <option value="인간관계">직장인 인간관계 30일</option>
+        </select>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" id="agreeCheck">
+        <label for="agreeCheck">환불 정책 및 이용약관에 동의합니다. 구독 시작 후 7일 이내 미발송분 일할 환불, 7일 초과 환불 불가.</label>
+      </div>
+      <button class="modal-submit" id="submitBtn" onclick="submitApply()">다음 → 카드 등록</button>
+    </div>
+
+    <!-- 2. 결제 처리 중 -->
+    <div class="modal-loading" id="applyLoading">
+      <div class="loading-spinner"></div>
+      <p class="done-title">결제 처리 중입니다</p>
+      <p class="done-sub">잠시만 기다려주세요. 화면을 닫지 마세요.</p>
+    </div>
+
+    <!-- 3. 완료 -->
+    <div class="modal-done" id="applyDone">
+      <div class="done-icon">🎉</div>
+      <p class="done-title">구독 신청 완료!</p>
+      <p class="done-sub">카드 등록과 결제가 완료되었습니다.</p>
+      <div class="done-bank">
+        <p><strong>구독 시리즈</strong> &nbsp; <span id="doneSeries">-</span></p>
+        <p><strong>구독료</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="donePrice">-</span> (자동 결제)</p>
+        <p><strong>첫 발송</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 익일 오전 7:30</p>
+        <p><strong>채널</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 카카오 알림톡</p>
+      </div>
+      <p class="done-note">내일 아침 7:30부터 매일 발송됩니다.<br>문의: justmoment.lr@gmail.com</p>
+    </div>
+
+    <!-- 4. 실패 -->
+    <div class="modal-fail" id="applyFail">
+      <div class="done-icon">😥</div>
+      <p class="done-title">결제에 실패했습니다</p>
+      <p class="done-sub" id="failMessage">카드 정보를 다시 확인하고 시도해주세요.</p>
+      <button class="modal-submit" onclick="resetModal()">다시 시도하기</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ============================================
+  // 설정값
+  // ============================================
+  const CLIENT_KEY = 'test_ck_EP59LybZ8BdWdpNwyN4nV6GYo7pR'; // 심사 완료 후 라이브 키로 교체
+  const SEATS_WEBHOOK_URL = 'https://hook.eu1.make.com/여기에_jm-seats_웹훅_URL_붙여넣기';
+  const BILLING_APPROVE_WEBHOOK_URL = 'https://hook.eu1.make.com/adxhuy4t76ebq6ia7o9uxpbisg0wyx6o';
+
+  let selectedPlan = { key: 'early1', label: '얼리버드 1기', price: 6900 };
+
+  // ============================================
+  // 잔여석 실시간 조회 (시나리오 3)
+  // ============================================
+  async function fetchSeats() {
+    try {
+      const res = await fetch(SEATS_WEBHOOK_URL);
+      if (!res.ok) throw new Error('웹훅 응답 오류: ' + res.status);
+      const data = await res.json();
+      updateSeatUI('early1', data.early1);
+      updateSeatUI('early2', data.early2);
+    } catch (err) {
+      console.error('잔여석 조회 실패:', err);
+      document.querySelectorAll('.seat-remaining').forEach(el => el.textContent = '');
+    }
+  }
+
+  function updateSeatUI(planKey, planData) {
+    if (!planData) return;
+    const card = document.querySelector(`[data-plan="${planKey}"]`);
+    if (!card) return;
+    const remainingEl = card.querySelector('.seat-remaining');
+    const fillEl = card.querySelector('.plan-seat-fill');
+    const ctaEl = card.querySelector('.plan-cta');
+    const { remaining, total, soldout } = planData;
+
+    if (remainingEl) {
+      remainingEl.classList.remove('seat-skeleton');
+      remainingEl.textContent = `${remaining}/${total}`;
+    }
+    if (fillEl) {
+      const pct = Math.max(0, Math.min(100, ((total - remaining) / total) * 100));
+      fillEl.style.width = `${pct}%`;
+    }
+    if (soldout) {
+      card.classList.add('is-soldout');
+      if (ctaEl) { ctaEl.disabled = true; ctaEl.textContent = '마감되었습니다'; }
+    }
+  }
+
+  // ============================================
+  // 신청 모달 열기/닫기
+  // ============================================
+  document.querySelectorAll('[data-open-modal]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.disabled) return;
+      const card = btn.closest('.plan-card');
+      selectedPlan = {
+        key: card.dataset.plan,
+        label: card.dataset.label,
+        price: parseInt(card.dataset.price, 10)
+      };
+      document.getElementById('modalTitle').textContent = `${selectedPlan.label} 신청`;
+      document.getElementById('modalSub').textContent =
+        `${selectedPlan.label} · ${selectedPlan.price.toLocaleString()}원 · 알림톡 구독`;
+      openModal();
+    });
+  });
+
+  function openModal() {
+    resetModal();
+    document.getElementById('applyModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('applyModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function resetModal() {
+    document.getElementById('applyForm').classList.remove('hidden');
+    document.getElementById('applyLoading').classList.remove('active');
+    document.getElementById('applyDone').classList.remove('active');
+    document.getElementById('applyFail').classList.remove('active');
+  }
+
+  // ============================================
+  // 신청 폼 제출 → Toss 카드 등록(빌링키 인증) 요청
+  // ============================================
+  async function submitApply() {
+    const name = document.getElementById('inputName').value.trim();
+    const phone = document.getElementById('inputPhone').value.trim();
+    const series = document.getElementById('inputSeries').value;
+    const agree = document.getElementById('agreeCheck').checked;
+
+    if (!name) { alert('이름을 입력해주세요.'); return; }
+    if (!phone || !/^01[0-9]{8,9}$/.test(phone)) { alert('전화번호를 올바르게 입력해주세요.\n예: 01012345678'); return; }
+    if (!series) { alert('시리즈를 선택해주세요.'); return; }
+    if (!agree) { alert('환불 정책에 동의해주세요.'); return; }
+
+    // 신청 정보를 세션에 저장 (Toss 리다이렉트 후에도 유지됨)
+    sessionStorage.setItem('jm_name', name);
+    sessionStorage.setItem('jm_phone', phone);
+    sessionStorage.setItem('jm_series', series);
+    sessionStorage.setItem('jm_plan', selectedPlan.key);
+    sessionStorage.setItem('jm_planLabel', selectedPlan.label);
+    sessionStorage.setItem('jm_price', selectedPlan.price);
+
+    const customerKey = 'jm_' + phone; // 전화번호 기반 고유 customerKey
+
+    try {
+      const tossPayments = TossPayments(CLIENT_KEY);
+      await tossPayments.requestBillingAuth('카드', {
+        customerKey: customerKey,
+        successUrl: window.location.origin + window.location.pathname + '?status=success',
+        failUrl: window.location.origin + window.location.pathname + '?status=fail',
+      });
+      // 성공 시 Toss 페이지로 리다이렉트되므로 이후 코드는 실행되지 않음
+    } catch (err) {
+      if (err.code === 'USER_CANCEL') return;
+      alert('오류가 발생했습니다.\n문의: justmoment.lr@gmail.com');
+    }
+  }
+
+  // ============================================
+  // Toss 리다이렉트 복귀 처리
+  // ============================================
+  const seriesMap = {
+    '부업시작': '부업 시작 30일',
+    '갓생루틴': '갓생 루틴·생산성 30일',
+    '직장인돈관리': '직장인 돈 관리 30일',
+    '커리어성장': '직장인 커리어 성장 30일',
+    '인간관계': '직장인 인간관계 30일'
+  };
+
+  async function handleBillingReturn() {
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get('status');
+    if (!status) return;
+
+    // 모달을 열어 로딩 상태로 전환
+    document.getElementById('applyModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('applyForm').classList.add('hidden');
+
+    if (status === 'fail') {
+      document.getElementById('applyLoading').classList.remove('active');
+      document.getElementById('failMessage').textContent = '카드 등록이 취소되었거나 실패했습니다. 다시 시도해주세요.';
+      document.getElementById('applyFail').classList.add('active');
+      window.history.replaceState({}, '', window.location.pathname);
+      return;
+    }
+
+    if (status === 'success') {
+      document.getElementById('applyLoading').classList.add('active');
+
+      // Toss가 successUrl에 자동으로 붙여주는 파라미터
+      const authKey = params.get('authKey');
+      const customerKey = params.get('customerKey');
+
+      // 신청 시 저장해둔 정보
+      const name = sessionStorage.getItem('jm_name') || '';
+      const phone = sessionStorage.getItem('jm_phone') || '';
+      const series = sessionStorage.getItem('jm_series') || '';
+      const plan = sessionStorage.getItem('jm_plan') || '';
+      const price = parseInt(sessionStorage.getItem('jm_price') || '0', 10);
+
+      if (!authKey || !customerKey) {
+        document.getElementById('applyLoading').classList.remove('active');
+        document.getElementById('failMessage').textContent = '결제 인증 정보를 확인할 수 없습니다. 문의: justmoment.lr@gmail.com';
+        document.getElementById('applyFail').classList.add('active');
+        window.history.replaceState({}, '', window.location.pathname);
+        return;
+      }
+
+      try {
+        const res = await fetch(BILLING_APPROVE_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ authKey, customerKey, name, phone, series, plan, price })
+        });
+        const result = await res.json();
+
+        document.getElementById('applyLoading').classList.remove('active');
+
+        if (result.success) {
+          document.getElementById('doneSeries').textContent = seriesMap[series] || series;
+          document.getElementById('donePrice').textContent = price ? `${price.toLocaleString()}원` : '-';
+          document.getElementById('applyDone').classList.add('active');
+        } else {
+          document.getElementById('failMessage').textContent = result.message || '결제 승인에 실패했습니다.';
+          document.getElementById('applyFail').classList.add('active');
+        }
+      } catch (err) {
+        console.error('결제 승인 웹훅 호출 실패:', err);
+        document.getElementById('applyLoading').classList.remove('active');
+        document.getElementById('failMessage').textContent = '서버 연결에 실패했습니다. 문의: justmoment.lr@gmail.com';
+        document.getElementById('applyFail').classList.add('active');
+      }
+
+      // 세션/URL 정리
+      sessionStorage.removeItem('jm_name');
+      sessionStorage.removeItem('jm_phone');
+      sessionStorage.removeItem('jm_series');
+      sessionStorage.removeItem('jm_plan');
+      sessionStorage.removeItem('jm_planLabel');
+      sessionStorage.removeItem('jm_price');
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('applyModal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+    fetchSeats();
+    setInterval(fetchSeats, 60000);
+    handleBillingReturn();
+  });
+</script>
+</body>
+</html>
