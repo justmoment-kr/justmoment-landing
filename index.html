@@ -228,66 +228,94 @@ section { padding: 100px max(24px, calc((100% - 1100px) / 2)); }
 }
 .book-item-title { font-size: 14px; font-weight: 500; color: var(--ink); }
 .book-item-sub { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
-/* PRICING — 시리즈별 단건 결제 카드 */
+/* PRICING — 대표 2개 + 카테고리 탭 + 컴팩트 카드 */
 .pricing-header { text-align: center; margin-bottom: 50px; }
-.series-grid {
+.featured-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 16px;
   max-width: 1100px;
-  margin: 0 auto;
+  margin: 0 auto 44px;
 }
-@media (max-width: 640px) { .series-grid { grid-template-columns: repeat(2, 1fr); } }
-.series-card {
+.featured-card {
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  transition: transform .2s ease;
+  padding: 28px;
 }
-.series-card:hover { transform: translateY(-3px); }
-.series-icon {
-  width: 40px; height: 40px;
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 19px;
-  margin-bottom: 16px;
+.featured-card.featured-dark { background: var(--ink); border-color: var(--ink); }
+.featured-top { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+.featured-badge {
+  font-size: 11px; font-weight: 600; letter-spacing: .5px;
+  color: var(--amber-bg); background: var(--amber);
+  padding: 4px 12px; border-radius: 100px;
 }
-.series-badge {
-  display: inline-block;
-  font-size: 11px; font-weight: 600;
-  letter-spacing: .5px;
-  color: var(--amber);
-  background: var(--amber-bg);
-  padding: 3px 12px; border-radius: 100px;
-  margin-bottom: 12px;
-  width: fit-content;
-}
-.series-title {
+.featured-badge.featured-badge-light { color: var(--amber); background: var(--amber-bg); }
+.featured-title {
   font-family: 'Noto Serif KR', serif;
-  font-size: 17px; font-weight: 600;
+  font-size: 20px; font-weight: 600;
   color: var(--ink);
   margin-bottom: 6px;
   line-height: 1.35;
 }
-.series-desc { font-size: 12.5px; color: var(--ink-muted); margin-bottom: 18px; line-height: 1.6; flex: 1; }
-.series-price-row { display: flex; align-items: baseline; gap: 6px; margin-bottom: 4px; }
+.featured-card.featured-dark .featured-title { color: var(--white); }
+.featured-desc { font-size: 13px; color: var(--ink-muted); margin-bottom: 24px; }
+.featured-card.featured-dark .featured-desc { color: rgba(255,255,255,0.6); }
+.featured-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.featured-card.featured-dark .series-price { color: var(--white); }
+.featured-card.featured-dark .series-price-unit { color: rgba(255,255,255,0.5); }
+.featured-cta {
+  background: var(--ink); color: var(--white);
+  padding: 11px 22px; border-radius: 100px;
+  font-size: 13.5px; font-weight: 600;
+  text-decoration: none; transition: opacity .2s;
+}
+.featured-cta:hover { opacity: .85; }
+.featured-card.featured-dark .featured-cta { background: var(--white); color: var(--ink); }
+.tab-header { text-align: center; margin-bottom: 24px; }
+.tab-label { font-size: 13px; color: var(--ink-muted); margin-bottom: 14px; }
+.tab-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.tab-chip {
+  font-family: inherit;
+  font-size: 13px; font-weight: 500;
+  padding: 8px 18px; border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--white); color: var(--ink-light);
+  cursor: pointer; transition: all .2s;
+}
+.tab-chip:hover { border-color: var(--ink-light); }
+.tab-chip.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.compact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.compact-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  transition: transform .2s ease, border-color .2s ease;
+  text-decoration: none;
+  display: block;
+}
+.compact-card:hover { transform: translateY(-2px); border-color: var(--ink-light); }
+.compact-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+.compact-title { font-size: 13.5px; font-weight: 500; color: var(--ink); margin-bottom: 6px; line-height: 1.4; }
+.compact-price { font-size: 13px; color: var(--amber); font-weight: 600; }
+/* 기존 카드 스타일 (다른 곳에서 재사용) */
+.series-price-row { display: flex; align-items: baseline; gap: 6px; }
 .series-price { font-family: 'Noto Serif KR', serif; font-size: 24px; font-weight: 600; line-height: 1; }
 .series-price-unit { font-size: 12px; color: var(--ink-muted); }
-.series-sub { font-size: 11.5px; color: var(--ink-muted); margin-bottom: 18px; }
-.series-cta {
-  display: block; width: 100%; text-align: center;
-  background: var(--ink); color: var(--white);
-  padding: 13px; border: none; border-radius: 100px;
-  font-size: 13.5px; font-weight: 600;
-  cursor: pointer; font-family: inherit;
-  text-decoration: none;
-  transition: opacity .2s;
-}
-.series-cta:hover { opacity: .85; }
-.pricing-note { text-align: center; margin-top: 28px; font-size: 12px; color: var(--ink-muted); line-height: 1.8; }
+.pricing-note { text-align: center; margin-top: 32px; font-size: 12px; color: var(--ink-muted); line-height: 1.8; }
 /* CTA BANNER */
 .cta-banner {
   background: var(--ink);
@@ -334,14 +362,17 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
 @media (max-width: 768px) {
   .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 100px; }
   .hero-visual { display: none; }
-  .stats-bar { flex-wrap: wrap; }
-  .stat { min-width: 50%; border-right: none; border-bottom: 1px solid var(--border); }
+  .stats-bar { flex-wrap: wrap; padding: 28px max(24px, calc((100% - 1100px) / 2)); }
+  .stat { min-width: 50%; border-right: none; border-bottom: 1px solid var(--border); padding: 10px 8px; }
   .stat:last-child { border-bottom: none; }
+  .stat-num { font-size: 22px; margin-bottom: 4px; }
+  .stat-label { font-size: 11.5px; }
   .steps { grid-template-columns: 1fr; }
   .step:first-child { border-radius: 16px 16px 0 0; }
   .step:last-child { border-radius: 0 0 16px 16px; }
   .content-grid { grid-template-columns: 1fr; }
   .footer-top { flex-direction: column; gap: 20px; }
+  .compact-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -453,165 +484,132 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
   </div>
 </section>
 
-<!-- PRICING — 시리즈별 단건 결제 -->
+<!-- PRICING — 대표 2개 + 카테고리 탭 + 컴팩트 카드 -->
 <section id="pricing" style="background: var(--white); margin: 0; padding-left: max(24px, calc((100% - 1100px) / 2)); padding-right: max(24px, calc((100% - 1100px) / 2));">
   <div class="pricing-header">
     <p class="section-eyebrow">Pricing</p>
     <h2 class="section-title">원하는 시리즈 하나 골라<br>바로 시작하세요</h2>
   </div>
 
-  <div class="series-grid">
-
-    <!-- 부업 시작 -->
-    <div class="series-card">
-      <div class="series-icon" style="background:#FFF1F2;">🚀</div>
-      <span class="series-badge">얼리버드 1기 · 10명 한정</span>
-      <p class="series-title">부업 시작 30일</p>
-      <p class="series-desc">퇴근 후 30분, 나만의 파이프라인을 만드는 30일</p>
-      <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
-      <p class="series-sub">선착순 10명 · 마감 시 자동 품절 표시</p>
-      <a class="series-cta" href="https://buy.tosspayments.com/products/iGBn13TNHs" target="_blank" rel="noopener">시작하기</a>
+  <div class="featured-grid">
+    <div class="featured-card featured-dark">
+      <div class="featured-top">
+        <div class="series-icon" style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;background:#F5F0FF;">🤝</div>
+        <span class="featured-badge">가장 많이 찾는 시리즈</span>
+      </div>
+      <p class="featured-title">직장인 인간관계 30일</p>
+      <p class="featured-desc">일 잘하는 사람의 관계 기술 30일</p>
+      <div class="featured-bottom">
+        <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
+        <a class="featured-cta" href="https://buy.tosspayments.com/products/yhBn13YGz4" target="_blank" rel="noopener">시작하기</a>
+      </div>
     </div>
-
-    <!-- 갓생 루틴·생산성 -->
-    <div class="series-card">
-      <div class="series-icon" style="background:#EEF2FF;">☀️</div>
-      <span class="series-badge">얼리버드 1기 · 10명 한정</span>
-      <p class="series-title">갓생 루틴·생산성 30일</p>
-      <p class="series-desc">작은 루틴이 만드는 단단한 하루 30일</p>
-      <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
-      <p class="series-sub">선착순 10명 · 마감 시 자동 품절 표시</p>
-      <a class="series-cta" href="https://buy.tosspayments.com/products/XXBn13VRqk" target="_blank" rel="noopener">시작하기</a>
+    <div class="featured-card">
+      <div class="featured-top">
+        <div class="series-icon" style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;background:#EEF2FF;">☀️</div>
+        <span class="featured-badge featured-badge-light">얼리버드 1기 · 10명 한정</span>
+      </div>
+      <p class="featured-title">갓생 루틴·생산성 30일</p>
+      <p class="featured-desc">작은 루틴이 만드는 단단한 하루 30일</p>
+      <div class="featured-bottom">
+        <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
+        <a class="featured-cta" href="https://buy.tosspayments.com/products/XXBn13VRqk" target="_blank" rel="noopener">시작하기</a>
+      </div>
     </div>
+  </div>
 
-    <!-- 직장인 돈 관리 -->
-    <div class="series-card">
-      <div class="series-icon" style="background:#FEF3E2;">📖</div>
-      <span class="series-badge">얼리버드 1기 · 10명 한정</span>
-      <p class="series-title">직장인 돈 관리 30일</p>
-      <p class="series-desc">월급으로도 새는 돈 막는 법 30일</p>
-      <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
-      <p class="series-sub">선착순 10명 · 마감 시 자동 품절 표시</p>
-      <a class="series-cta" href="https://buy.tosspayments.com/products/TDBn13WgjE" target="_blank" rel="noopener">시작하기</a>
+  <div class="tab-header">
+    <p class="tab-label">다른 시리즈도 둘러보세요</p>
+    <div class="tab-row" id="tabRow">
+      <button type="button" class="tab-chip active" data-cat="all">전체 11개</button>
+      <button type="button" class="tab-chip" data-cat="money">돈 · 커리어</button>
+      <button type="button" class="tab-chip" data-cat="work">직장 스킬</button>
+      <button type="button" class="tab-chip" data-cat="mind">마인드 · 철학</button>
     </div>
+  </div>
 
-    <!-- 직장인 커리어 성장 -->
-    <div class="series-card">
-      <div class="series-icon" style="background:#F0FDF4;">🧭</div>
-      <span class="series-badge">얼리버드 1기 · 10명 한정</span>
-      <p class="series-title">직장인 커리어 성장 30일</p>
-      <p class="series-desc">5년 뒤 나를 만드는 선택들 30일</p>
-      <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
-      <p class="series-sub">선착순 10명 · 마감 시 자동 품절 표시</p>
-      <a class="series-cta" href="https://buy.tosspayments.com/products/gdBn13XdZE" target="_blank" rel="noopener">시작하기</a>
-    </div>
-
-    <!-- 직장인 인간관계 -->
-    <div class="series-card">
-      <div class="series-icon" style="background:#F5F0FF;">🤝</div>
-      <span class="series-badge">얼리버드 1기 · 10명 한정</span>
-      <p class="series-title">직장인 인간관계 30일</p>
-      <p class="series-desc">일 잘하는 사람의 관계 기술 30일</p>
-      <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
-      <p class="series-sub">선착순 10명 · 마감 시 자동 품절 표시</p>
-      <a class="series-cta" href="https://buy.tosspayments.com/products/yhBn13YGz4" target="_blank" rel="noopener">시작하기</a>
-    </div>
-
-        <!-- 투자 멘탈 -->
-        <div class="series-card">
-          <div class="series-icon" style="background:#FFFBEB;">📈</div>
-          <span class="series-badge">얼리버드 1기 · 10명 한정</span>
-          <p class="series-title">투자 멘탈 30일</p>
-          <p class="series-desc">흔들리지 않는 투자 마인드를 만드는 30일</p>
-          <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
-          <p class="series-sub">선착순 10명 · 마감 시 자동 품절 표시</p>
-          <a class="series-cta" href="https://buy.tosspayments.com/products/RVBn5MC0PU" target="_blank" rel="noopener">시작하기</a>
-        </div>
-
-        <!-- 협상력 -->
-        <div class="series-card">
-          <div class="series-icon" style="background:#ECFEFF;">💬</div>
-          <span class="series-badge">얼리버드 1기 · 10명 한정</span>
-          <p class="series-title">협상력 30일</p>
-          <p class="series-desc">직장에서 통하는 협상의 기술 30일</p>
-          <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
-          <p class="series-sub">선착순 10명 · 마감 시 자동 품절 표시</p>
-          <a class="series-cta" href="https://buy.tosspayments.com/products/dBBn5L_MhY" target="_blank" rel="noopener">시작하기</a>
-        </div>
-
-        <!-- 의사결정력 -->
-        <div class="series-card">
-          <div class="series-icon" style="background:#FDF4FF;">🧩</div>
-          <span class="series-badge">얼리버드 1기 · 10명 한정</span>
-          <p class="series-title">의사결정력 30일</p>
-          <p class="series-desc">좋은 결정을 내리는 힘을 기르는 30일</p>
-          <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
-          <p class="series-sub">선착순 10명 · 마감 시 자동 품절 표시</p>
-          <a class="series-cta" href="https://buy.tosspayments.com/products/GyBn5L2oqw" target="_blank" rel="noopener">시작하기</a>
-        </div>
-
-        <!-- 시간 관리 -->
-        <div class="series-card">
-          <div class="series-icon" style="background:#FDF2F8;">⏱️</div>
-          <span class="series-badge">얼리버드 1기 · 10명 한정</span>
-          <p class="series-title">시간 관리 30일</p>
-          <p class="series-desc">야근 없이 일 끝내는 습관 30일</p>
-          <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
-          <p class="series-sub">선착순 10명 · 마감 시 자동 품절 표시</p>
-          <a class="series-cta" href="https://buy.tosspayments.com/products/dpBn5LzJgg" target="_blank" rel="noopener">시작하기</a>
-        </div>
-
-        <!-- 스토아 철학 -->
-        <div class="series-card">
-          <div class="series-icon" style="background:#F7FEE7;">🏛️</div>
-          <span class="series-badge">얼리버드 1기 · 10명 한정</span>
-          <p class="series-title">스토아 철학 30일</p>
-          <p class="series-desc">2000년을 버틴 마음 다스리는 법 30일</p>
-          <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
-          <p class="series-sub">선착순 10명 · 마감 시 자동 품절 표시</p>
-          <a class="series-cta" href="https://buy.tosspayments.com/products/mCBn5LvZ7U" target="_blank" rel="noopener">시작하기</a>
-        </div>
-
-        <!-- 직장인 글쓰기 -->
-        <div class="series-card">
-          <div class="series-icon" style="background:#EFF6FF;">✍️</div>
-          <span class="series-badge">얼리버드 1기 · 10명 한정</span>
-          <p class="series-title">직장인 글쓰기 30일</p>
-          <p class="series-desc">직장에서 통하는 글쓰기 30일</p>
-          <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
-          <p class="series-sub">선착순 10명 · 마감 시 자동 품절 표시</p>
-          <a class="series-cta" href="https://buy.tosspayments.com/products/DBBn5Lruj4" target="_blank" rel="noopener">시작하기</a>
-        </div>
-
-        <!-- 데일 카네기 인간관계 -->
-        <div class="series-card">
-          <div class="series-icon" style="background:#FEF2F2;">🗣️</div>
-          <span class="series-badge">얼리버드 1기 · 10명 한정</span>
-          <p class="series-title">데일 카네기 인간관계 30일</p>
-          <p class="series-desc">사람을 다루는 기술을 배우는 30일</p>
-          <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
-          <p class="series-sub">선착순 10명 · 마감 시 자동 품절 표시</p>
-          <a class="series-cta" href="https://buy.tosspayments.com/products/RyBn5Ln9PI" target="_blank" rel="noopener">시작하기</a>
-        </div>
-
-        <!-- 직장인 절세 -->
-        <div class="series-card">
-          <div class="series-icon" style="background:#FAF5FF;">💸</div>
-          <span class="series-badge">얼리버드 1기 · 10명 한정</span>
-          <p class="series-title">직장인 절세 30일</p>
-          <p class="series-desc">직장인 절세의 모든 것 30일</p>
-          <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
-          <p class="series-sub">선착순 10명 · 마감 시 자동 품절 표시</p>
-          <a class="series-cta" href="https://buy.tosspayments.com/products/gPBn5Ljmgw" target="_blank" rel="noopener">시작하기</a>
-        </div>
-
+  <div class="compact-grid" id="compactGrid">
+    <a class="compact-card" data-cat="money" href="https://buy.tosspayments.com/products/iGBn13TNHs" target="_blank" rel="noopener">
+      <div class="compact-icon" style="background:#FFF1F2;">🚀</div>
+      <p class="compact-title">부업 시작 30일</p>
+      <p class="compact-price">6,900원</p>
+    </a>
+    <a class="compact-card" data-cat="money" href="https://buy.tosspayments.com/products/TDBn13WgjE" target="_blank" rel="noopener">
+      <div class="compact-icon" style="background:#FEF3E2;">📖</div>
+      <p class="compact-title">직장인 돈 관리 30일</p>
+      <p class="compact-price">6,900원</p>
+    </a>
+    <a class="compact-card" data-cat="money" href="https://buy.tosspayments.com/products/gdBn13XdZE" target="_blank" rel="noopener">
+      <div class="compact-icon" style="background:#F0FDF4;">🧭</div>
+      <p class="compact-title">직장인 커리어 성장 30일</p>
+      <p class="compact-price">6,900원</p>
+    </a>
+    <a class="compact-card" data-cat="work" href="https://buy.tosspayments.com/products/DBBn5Lruj4" target="_blank" rel="noopener">
+      <div class="compact-icon" style="background:#EFF6FF;">✍️</div>
+      <p class="compact-title">직장인 글쓰기 30일</p>
+      <p class="compact-price">6,900원</p>
+    </a>
+    <a class="compact-card" data-cat="work" href="https://buy.tosspayments.com/products/dBBn5L_MhY" target="_blank" rel="noopener">
+      <div class="compact-icon" style="background:#ECFEFF;">💬</div>
+      <p class="compact-title">협상력 30일</p>
+      <p class="compact-price">6,900원</p>
+    </a>
+    <a class="compact-card" data-cat="work" href="https://buy.tosspayments.com/products/GyBn5L2oqw" target="_blank" rel="noopener">
+      <div class="compact-icon" style="background:#FDF4FF;">🧩</div>
+      <p class="compact-title">의사결정력 30일</p>
+      <p class="compact-price">6,900원</p>
+    </a>
+    <a class="compact-card" data-cat="work" href="https://buy.tosspayments.com/products/dpBn5LzJgg" target="_blank" rel="noopener">
+      <div class="compact-icon" style="background:#FDF2F8;">⏱️</div>
+      <p class="compact-title">시간 관리 30일</p>
+      <p class="compact-price">6,900원</p>
+    </a>
+    <a class="compact-card" data-cat="work" href="https://buy.tosspayments.com/products/gPBn5Ljmgw" target="_blank" rel="noopener">
+      <div class="compact-icon" style="background:#FAF5FF;">💸</div>
+      <p class="compact-title">직장인 절세 30일</p>
+      <p class="compact-price">6,900원</p>
+    </a>
+    <a class="compact-card" data-cat="mind" href="https://buy.tosspayments.com/products/RVBn5MC0PU" target="_blank" rel="noopener">
+      <div class="compact-icon" style="background:#FFFBEB;">📈</div>
+      <p class="compact-title">투자 멘탈 30일</p>
+      <p class="compact-price">6,900원</p>
+    </a>
+    <a class="compact-card" data-cat="mind" href="https://buy.tosspayments.com/products/mCBn5LvZ7U" target="_blank" rel="noopener">
+      <div class="compact-icon" style="background:#F7FEE7;">🏛️</div>
+      <p class="compact-title">스토아 철학 30일</p>
+      <p class="compact-price">6,900원</p>
+    </a>
+    <a class="compact-card" data-cat="mind" href="https://buy.tosspayments.com/products/RyBn5Ln9PI" target="_blank" rel="noopener">
+      <div class="compact-icon" style="background:#FEF2F2;">🗣️</div>
+      <p class="compact-title">데일 카네기 인간관계 30일</p>
+      <p class="compact-price">6,900원</p>
+    </a>
   </div>
 
   <p class="pricing-note">
     결제 후 이름과 카카오톡 수신 전화번호를 입력하시면, 다음 날 오전 7:30부터 30일간 매일 발송됩니다.<br>
-    자동 재결제가 없는 단건 결제이며, 시리즈는 1회 결제당 1개입니다.
+    자동 재결제가 없는 단건 결제이며, 시리즈는 1회 결제당 1개입니다.<br>
+    <span>* 얼리버드 인원 마감 시, 결제 단계에서 다음 가격이 자동으로 안내됩니다.</span>
   </p>
 </section>
+
+<script>
+(function () {
+  var chips = document.querySelectorAll('.tab-chip');
+  var cards = document.querySelectorAll('.compact-card');
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      chips.forEach(function (c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      var cat = chip.getAttribute('data-cat');
+      cards.forEach(function (card) {
+        var show = cat === 'all' || card.getAttribute('data-cat') === cat;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
 
 <!-- CTA BANNER -->
 <div class="cta-banner">
