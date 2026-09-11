@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>잠깐서봐 — 매일 아침 책 한 권의 핵심</title>
-<meta name="description" content="읽고 싶지만 시간이 없는 당신을 위해. 30일간, 매일 아침 카카오톡으로 책의 핵심 인사이트를 전달합니다.">
-<meta property="og:title" content="잠깐서봐 — 매일 아침 책 한 권의 핵심">
-<meta property="og:description" content="읽고 싶지만 시간이 없는 당신을 위해. 30일간, 매일 아침 카카오톡으로 책의 핵심 인사이트를 전달합니다.">
+<title>잠깐서봐 — 직장 인간관계, 매일 아침 3분씩</title>
+<meta name="description" content="직장 인간관계, 매일 아침 3분씩. 30일 동안 카카오톡으로 관계 인사이트와 실천 질문을 받아보세요. 1회 결제, 자동결제 없음.">
+<meta property="og:title" content="잠깐서봐 — 직장 인간관계, 매일 아침 3분씩">
+<meta property="og:description" content="직장 인간관계, 매일 아침 3분씩. 30일 동안 카카오톡으로 관계 인사이트와 실천 질문을 받아보세요. 1회 결제, 자동결제 없음.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://justmoment.kr">
+<meta property="og:url" content="https://justmoment.kr/">
+<link rel="canonical" href="https://justmoment.kr/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -17,14 +18,18 @@
   --cream: #FAF8F4;
   --ink: #1C1C1A;
   --ink-light: #5A5A56;
-  --ink-muted: #9A9A94;
+  --ink-muted: #6D6D66;
   --amber: #C4710A;
   --amber-bg: #FEF3E2;
   --border: #E4E2DC;
   --white: #FFFFFF;
   --sold: #B8B4AA;
 }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+[id] { scroll-margin-top: 84px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--amber); outline-offset: 5px; }
+.skip-link { position: fixed; top: -100px; left: 16px; z-index: 200; background: var(--ink); color: white; padding: 10px 16px; }
+.skip-link:focus { top: 10px; }
 body {
   font-family: 'Noto Sans KR', sans-serif;
   background: var(--cream);
@@ -64,11 +69,11 @@ nav {
 section { padding: 100px max(24px, calc((100% - 1100px) / 2)); }
 /* HERO */
 .hero {
-  padding-top: 160px;
-  padding-bottom: 100px;
+  padding-top: 120px;
+  padding-bottom: 64px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  gap: 56px;
   align-items: center;
 }
 .hero-eyebrow {
@@ -79,7 +84,7 @@ section { padding: 100px max(24px, calc((100% - 1100px) / 2)); }
 }
 .hero h1 {
   font-family: 'Noto Serif KR', serif;
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(32px, 3.6vw, 46px);
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -1px;
@@ -122,7 +127,38 @@ section { padding: 100px max(24px, calc((100% - 1100px) / 2)); }
 }
 .btn-secondary:hover { border-color: var(--ink-light); }
 /* HERO VISUAL */
-.hero-visual { display: flex; flex-direction: column; gap: 10px; }
+.hero-visual { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.hero-content { min-width: 0; }
+.hero-desc { font-weight: 400; }
+.hero-kicker { margin: 24px 0 0; color: var(--ink-light); font-size: 13px; }
+.hero-kicker span { display: inline-block; }
+.hero-buyline { font-size: 14px; color: var(--ink); margin: 12px 0 0; }
+.sample-label { font-size: 12px; color: var(--ink-light); margin-bottom: 12px; }
+.sample-card { padding: 26px; border-top: 4px solid #FEE500; }
+.sample-card .msg-title { font-size: 21px; margin-bottom: 16px; line-height: 1.45; }
+.sample-excerpt { font-size: 14px; color: var(--ink-light); line-height: 1.8; }
+.sample-excerpt p + p { margin-top: 14px; }
+.sample-excerpt strong { color: var(--ink); font-weight: 500; }
+.sample-question { margin-top: 20px; padding: 16px; border-radius: 10px; background: var(--amber-bg); color: var(--ink); font-size: 14px; line-height: 1.8; }
+.sample-question strong { display: block; margin-bottom: 4px; font-size: 12px; color: #925205; }
+.sample-full { margin-top: 18px; border-top: 1px solid var(--border); padding-top: 14px; }
+.sample-full summary { cursor: pointer; color: var(--ink); font-size: 13px; font-weight: 500; min-height: 32px; }
+.sample-full-text { font-size: 14px; line-height: 1.85; color: var(--ink-light); margin-top: 12px; }
+.sample-full-text p + p { margin-top: 14px; }
+.sample-purchase .btn-primary { display: block; text-align: center; padding: 15px 18px; }
+.purchase-note { color: var(--ink-light); font-size: 12px; line-height: 1.8; margin-top: 9px; }
+.purchase-note a { color: inherit; text-underline-offset: 3px; }
+.sample-purchase .purchase-note { text-align: center; }
+.course-topics { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.course-topics li { padding: 18px 20px; background: var(--white); border: 1px solid var(--border); border-radius: 12px; }
+.course-topics span { display: block; font-size: 12px; color: var(--amber); margin-bottom: 4px; }
+.course-topics strong { font-size: 15px; font-weight: 500; }
+.all-series { margin-top: 24px; }
+.all-series > summary { width: fit-content; margin: 0 auto; cursor: pointer; padding: 12px 22px; border: 1px solid var(--border); border-radius: 100px; font-size: 14px; }
+.all-series[open] > summary { margin-bottom: 28px; }
+.featured-card.featured-dark .purchase-note { color: #D1D1CE; }
+.featured-card.featured-dark .featured-desc { color: #D1D1CE; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
 .msg-card {
   background: var(--white);
   border: 1px solid var(--border);
@@ -369,10 +405,24 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 100px; }
-  .hero-visual { display: none; }
+  .hero-visual { display: flex; }
+  section { padding-top: 64px; padding-bottom: 64px; }
+  .hero { gap: 32px; padding-bottom: 48px; }
+  .hero h1 { font-size: clamp(29px, 8.2vw, 40px); }
+  .hero-desc { font-size: 16px; margin-bottom: 24px; }
+  .hero-actions .btn-primary, .hero-actions .btn-secondary { padding: 12px 18px; font-size: 14px; }
+  .sample-card { padding: 20px; }
+  .sample-card .msg-title { font-size: 19px; }
+  .sample-excerpt, .sample-full-text { font-size: 14px; }
+  .featured-grid { grid-template-columns: minmax(0, 1fr); }
+  .featured-card { padding: 24px; }
+  .featured-bottom { align-items: flex-start; }
+  .featured-cta { text-align: center; }
+  .footer-biz { overflow-wrap: anywhere; }
+  .footer-links { flex-wrap: wrap; gap: 16px; }
   .stats-bar { flex-wrap: wrap; padding: 28px max(24px, calc((100% - 1100px) / 2)); }
   .stat { min-width: 50%; border-right: none; border-bottom: 1px solid var(--border); padding: 10px 8px; }
-  .stat:last-child { border-bottom: none; }
+  .stat:nth-last-child(-n+2) { border-bottom: none; }
   .stat-num { font-size: 22px; margin-bottom: 4px; }
   .stat-label { font-size: 11.5px; }
   .steps { grid-template-columns: 1fr; }
@@ -385,40 +435,60 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">본문 바로가기</a>
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">잠깐서봐</a>
-  <a href="#pricing" class="nav-cta">시작하기</a>
+  <a href="#main" class="nav-logo">잠깐서봐</a>
+  <a href="#pricing" class="nav-cta">시리즈 보기</a>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<main id="main">
+<section class="hero" aria-labelledby="hero-title">
   <div class="hero-content">
-    <p class="hero-eyebrow">카카오 알림톡 콘텐츠</p>
-    <h1>책 한 권의 핵심,<br>매일 아침 <em>3분</em>으로</h1>
+    <p class="hero-eyebrow">카카오톡으로 받는 30일 관계 코스</p>
+    <h1 id="hero-title">직장 인간관계,<br>매일 아침 <em>3분씩</em></h1>
     <p class="hero-desc">
-      읽고 싶지만 시간이 없는 당신을 위해.<br>
-      30일간, 매일 아침 카카오톡으로<br>
-      책의 핵심 인사이트를 전달합니다.
+      어색한 첫인사부터 어려운 거절까지.<br>
+      30일 동안 매일 아침 카카오톡으로<br>
+      관계 인사이트와 실천 질문을 보내드려요.
     </p>
     <div class="hero-actions">
-      <a href="#pricing" class="btn-primary" style="text-decoration:none;">시작하기</a>
-      <a href="#how" class="btn-secondary">어떻게 작동하나요?</a>
+      <a href="#sample" class="btn-primary">하루치 먼저 읽어보기</a>
+      <a href="#pricing" class="btn-secondary">다른 시리즈 보기</a>
     </div>
+    <p class="hero-kicker"><span>매일 오전 7:30</span> · <span>30일 코스</span> · <span>자동결제 없음</span></p>
+    <p class="hero-buyline">직장인 인간관계 30일 · 얼리버드 6,900원</p>
   </div>
-  <div class="hero-visual">
-    <div class="msg-card">
-      <span class="day-badge">Day 07 · 손자병법</span>
-      <p class="msg-title">싸우지 않고 이기는 것이 최선이다</p>
-      <p class="msg-body">손자는 전쟁의 목적이 '파괴'가 아닌 '목적 달성'임을 강조합니다. 직장에서도 마찬가지. 설득과 협상으로 원하는 결과를 얻는 사람이 진짜 고수입니다.</p>
-      <div class="msg-footer"><span class="kakao-dot"></span>잠깐서봐 · 오전 7:30</div>
-    </div>
-    <div class="msg-card dim">
-      <span class="day-badge">Day 08 · 손자병법</span>
-      <p class="msg-title">적을 알고 나를 알면 백전불태</p>
-      <p class="msg-body">상대방을 파악하기 전에 행동하는 것은 눈 감고 운전하는 것과 같습니다. 오늘은 중요한 미팅 전, 상대방을 먼저 연구해보세요.</p>
-      <div class="msg-footer"><span class="kakao-dot"></span>잠깐서봐 · 오전 7:30</div>
+  <div class="hero-visual" id="sample">
+    <article class="msg-card sample-card" aria-labelledby="sample-title">
+      <p class="sample-label">실제로 받는 콘텐츠 · 아래 본문은 일부 발췌</p>
+      <span class="day-badge">Day 01 · 직장인 인간관계</span>
+      <h2 class="msg-title" id="sample-title">첫인상 — 관계를 여는 작은 행동</h2>
+      <div class="sample-excerpt">
+        <p><strong>편안하게 인사하기</strong><br>상대방이 부담스럽지 않게 인사하고<br>내 이름과 맡은 일을 짧게 소개해보세요.</p>
+        <p><strong>이름과 호칭 확인하기</strong><br>어떻게 불러드리면 좋을지 확인해보세요.<br>잘못 들었다면 다시 물어봐도 괜찮아요.</p>
+        <p><strong>말하기보다 먼저 듣기</strong><br>상대방의 말을 끝까지 듣고<br>궁금한 점을 하나 물어보세요.</p>
+      </div>
+      <div class="sample-question"><strong>오늘의 실천 질문</strong>최근 직장에서 새로 만난 사람이 있나요?<br>그 사람의 이름을 기억하고 있나요?</div>
+      <details class="sample-full">
+        <summary>1일차 본문 전체 읽기</summary>
+        <div class="sample-full-text">
+          <p>처음 만나는 동료 앞에서는<br>무슨 말을 해야 할지 고민될 때가 있어요.</p>
+<p>첫 만남에서 인상을 받더라도<br>그것만으로 상대방을 정확히 안다고 볼 수는 없어요.<br>관계는 이후의 대화와 행동을 통해 달라질 수 있어요.</p>
+<p>첫 만남에서 챙겨볼 세 가지예요.</p>
+<p>편안하게 인사하기<br>상대방이 부담스럽지 않게 인사하고<br>내 이름과 맡은 일을 짧게 소개해보세요.</p>
+<p>이름과 호칭 확인하기<br>어떻게 불러드리면 좋을지 확인해보세요.<br>잘못 들었다면 다시 물어봐도 괜찮아요.</p>
+<p>말하기보다 먼저 듣기<br>상대방의 말을 끝까지 듣고<br>궁금한 점을 하나 물어보세요.</p>
+<p>첫 만남이 어색했다고 관계가 끝나는 건 아니에요.<br>다음 인사와 작은 약속부터 다시 쌓아가면 돼요.</p>
+        </div>
+      </details>
+      <div class="msg-footer"><span class="kakao-dot" aria-hidden="true"></span>잠깐서봐 · 오전 7:30</div>
+    </article>
+    <div class="sample-purchase">
+      <a href="https://buy.tosspayments.com/products/yhBn13YGz4" class="btn-primary" target="_blank" rel="noopener" aria-describedby="sample-purchase-note">인간관계 30일 시작하기 · 6,900원</a>
+      <p class="purchase-note" id="sample-purchase-note">얼리버드 1기 · 1회 결제 · 자동결제 없음<br>결제 후 이름·수신 전화번호 입력 · 다음 날부터 발송<br>얼리버드 마감 시 적용 가격은 토스 상품 페이지에서 확인해주세요.</p>
     </div>
   </div>
 </section>
@@ -426,7 +496,7 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
 <!-- STATS -->
 <div class="stats-bar">
   <div class="stat"><span class="stat-num">30</span><span class="stat-label">일간 매일 발송</span></div>
-  <div class="stat"><span class="stat-num">3분</span><span class="stat-label">하루 읽기 분량</span></div>
+  <div class="stat"><span class="stat-num">3분</span><span class="stat-label">읽고 생각하는 하루 습관</span></div>
   <div class="stat"><span class="stat-num">오전 7:30</span><span class="stat-label">카카오톡 수신 시간</span></div>
   <div class="stat"><span class="stat-num">6,900원</span><span class="stat-label">얼리버드 1기 가격</span></div>
 </div>
@@ -435,60 +505,44 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
 <section id="how">
   <div class="how-header">
     <p class="section-eyebrow">How it works</p>
-    <h2 class="section-title">결제 한 번이면 끝, 알아서 옵니다</h2>
+    <h2 class="section-title">한 번 신청하고,<br>30일 동안 받아보세요</h2>
   </div>
   <div class="steps">
     <div class="step">
       <div class="step-num">01</div>
-      <h3>시리즈 선택 후 결제</h3>
-      <p>원하는 시리즈를 하나 골라 결제합니다. 재구매나 자동결제 없이, 딱 한 번의 결제로 끝나요.</p>
+      <h3>결제하고 수신 정보 입력</h3>
+      <p>원하는 시리즈를 결제한 뒤 이름과 카카오톡 수신 전화번호를 입력해주세요. 1회 결제로 한 시리즈를 이용하며, 자동결제는 없어요.</p>
     </div>
     <div class="step">
       <div class="step-num">02</div>
       <h3>매일 아침 알림톡</h3>
-      <p>결제 다음 날부터 오전 7시 30분, 카카오톡으로 책의 핵심 인사이트가 도착합니다.</p>
+      <p>결제 다음 날부터 매일 오전 7시 30분, 선택한 시리즈의 콘텐츠가 카카오톡으로 도착해요.</p>
     </div>
     <div class="step">
       <div class="step-num">03</div>
-      <h3>30일 완독</h3>
-      <p>30일이 지나면 책 한 권을 완독한 셈. 다른 시리즈가 궁금하면 그때 또 골라 결제하면 됩니다.</p>
+      <h3>하루 하나씩, 30일 코스</h3>
+      <p>인간관계 시리즈에서는 매일 하나의 주제를 읽고 실천 질문에 답해보세요. 30일 후 다른 시리즈가 궁금하면 그때 새로 선택하면 돼요.</p>
     </div>
   </div>
 </section>
 
 <!-- CONTENT -->
-<section>
+<section aria-labelledby="course-title">
   <div class="content-grid">
     <div class="content-text">
-      <p class="section-eyebrow">Content</p>
-      <h2>요약이 아닌<br>해석과 적용</h2>
-      <p>단순한 책 요약이 아닙니다. 핵심 개념을 실생활과 직장 생활에 어떻게 적용할지, 구체적인 인사이트로 재창작합니다.</p>
+      <p class="section-eyebrow">30일 동안 다루는 이야기</p>
+      <h2 id="course-title">함께 일하는 사이,<br>오늘 한 가지부터</h2>
+      <p>먼저 말을 걸기 어렵거나, 부탁을 거절한 뒤 마음이 쓰일 때.<br>직장에서 마주치는 관계의 순간을 하나씩 다뤄요. 짧게 읽고, 오늘 내 상황에 어떻게 적용할지 생각해보세요.</p>
       <div class="tag-list">
-        <span class="tag">직장인 돈 관리</span>
-        <span class="tag">부업 시작하기</span>
-        <span class="tag">갓생 루틴</span>
-        <span class="tag">커리어 성장</span>
-        <span class="tag">인간관계</span>
+        <span class="tag">첫인상과 경청</span><span class="tag">부탁과 거절</span><span class="tag">갈등과 거리 두기</span><span class="tag">신뢰와 협업</span>
       </div>
     </div>
-    <div class="book-list">
-      <div class="book-item">
-        <div class="book-icon" style="background:#FEF3E2;">📖</div>
-        <div><div class="book-item-title">직장인 돈 관리 30일</div><div class="book-item-sub">돈을 모으는 구조를 설계합니다</div></div>
-      </div>
-      <div class="book-item">
-        <div class="book-icon" style="background:#FFF1F2;">🚀</div>
-        <div><div class="book-item-title">부업 시작 30일</div><div class="book-item-sub">퇴근 후 수입을 만드는 첫 걸음</div></div>
-      </div>
-      <div class="book-item">
-        <div class="book-icon" style="background:#EEF2FF;">☀️</div>
-        <div><div class="book-item-title">갓생 루틴·생산성 30일</div><div class="book-item-sub">아침이 바뀌면 하루가 바뀝니다</div></div>
-      </div>
-      <div class="book-item">
-        <div class="book-icon" style="background:#F0FDF4;">🧭</div>
-        <div><div class="book-item-title">직장인 커리어 성장 30일</div><div class="book-item-sub">다음 단계로 가는 구체적 방법</div></div>
-      </div>
-    </div>
+    <ol class="course-topics" aria-label="인간관계 시리즈 주제 예시">
+      <li><span>Day 01</span><strong>첫인상 — 관계를 여는 작은 행동</strong></li>
+      <li><span>Day 09</span><strong>거절을 잘하는 법 — &quot;No&quot;를 부드럽게</strong></li>
+      <li><span>Day 17</span><strong>무례한 동료 대처법</strong></li>
+      <li><span>Day 22</span><strong>신뢰는 어떻게 쌓이는가</strong></li>
+    </ol>
   </div>
 </section>
 
@@ -503,14 +557,15 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
     <div class="featured-card featured-dark">
       <div class="featured-top">
         <div class="series-icon" style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;background:#F5F0FF;">🤝</div>
-        <span class="featured-badge">가장 많이 찾는 시리즈</span>
+        <span class="featured-badge">처음이라면 이 시리즈</span>
       </div>
       <p class="featured-title">직장인 인간관계 30일</p>
-      <p class="featured-desc">일 잘하는 사람의 관계 기술 30일</p>
+      <p class="featured-desc">첫인사·경청·거절·갈등·신뢰까지.<br>함께 일하는 관계가 고민인 직장인을 위한 30일 코스.</p>
       <div class="featured-bottom">
         <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
-        <a class="featured-cta" href="https://buy.tosspayments.com/products/yhBn13YGz4" target="_blank" rel="noopener">시작하기</a>
+        <a class="featured-cta" href="https://buy.tosspayments.com/products/yhBn13YGz4" target="_blank" rel="noopener">인간관계 시작하기</a>
       </div>
+      <p class="purchase-note">1회 결제 · 자동결제 없음 · 다음 날부터 발송</p>
     </div>
     <div class="featured-card">
       <div class="featured-top">
@@ -521,19 +576,21 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
       <p class="featured-desc">작은 루틴이 만드는 단단한 하루 30일</p>
       <div class="featured-bottom">
         <div class="series-price-row"><span class="series-price">6,900원</span><span class="series-price-unit">/ 30일</span></div>
-        <a class="featured-cta" href="https://buy.tosspayments.com/products/XXBn13VRqk" target="_blank" rel="noopener">시작하기</a>
+        <a class="featured-cta" href="https://buy.tosspayments.com/products/XXBn13VRqk" target="_blank" rel="noopener">루틴 시리즈 보기</a>
       </div>
     </div>
   </div>
 
+  <details class="all-series">
+    <summary>전체 18개 시리즈 둘러보기</summary>
   <div class="tab-header">
     <p class="tab-label">다른 시리즈도 둘러보세요</p>
     <div class="tab-row" id="tabRow">
-      <button type="button" class="tab-chip active" data-cat="all">전체 18개</button>
-      <button type="button" class="tab-chip" data-cat="money">돈 · 커리어</button>
-      <button type="button" class="tab-chip" data-cat="work">직장 스킬</button>
-      <button type="button" class="tab-chip" data-cat="mind">마인드 · 철학</button>
-      <button type="button" class="tab-chip" data-cat="leadership">리더십</button>
+      <button type="button" class="tab-chip active" aria-pressed="true" data-cat="all">전체 18개</button>
+      <button type="button" class="tab-chip" aria-pressed="false" data-cat="money">돈 · 커리어</button>
+      <button type="button" class="tab-chip" aria-pressed="false" data-cat="work">직장 스킬</button>
+      <button type="button" class="tab-chip" aria-pressed="false" data-cat="mind">마인드 · 철학</button>
+      <button type="button" class="tab-chip" aria-pressed="false" data-cat="leadership">리더십</button>
     </div>
   </div>
 
@@ -630,10 +687,12 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
         </a>
   </div>
 
+  </details>
+
   <p class="pricing-note">
     결제 후 이름과 카카오톡 수신 전화번호를 입력하시면, 다음 날 오전 7:30부터 30일간 매일 발송됩니다.<br>
     자동 재결제가 없는 단건 결제이며, 시리즈는 1회 결제당 1개입니다.<br>
-    <span>* 얼리버드 인원 마감 시, 결제 단계에서 다음 가격이 자동으로 안내됩니다.</span>
+    <span>얼리버드 마감 시 적용 가격은 토스 상품 페이지에서 확인해주세요. 결제 전 상품과 최종 금액을 확인해주세요.</span>
   </p>
 </section>
 
@@ -643,8 +702,9 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
   var cards = document.querySelectorAll('.compact-card');
   chips.forEach(function (chip) {
     chip.addEventListener('click', function () {
-      chips.forEach(function (c) { c.classList.remove('active'); });
+      chips.forEach(function (c) { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
       chip.classList.add('active');
+      chip.setAttribute('aria-pressed', 'true');
       var cat = chip.getAttribute('data-cat');
       cards.forEach(function (card) {
         var show = cat === 'all' || card.getAttribute('data-cat') === cat;
@@ -657,10 +717,12 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
 
 <!-- CTA BANNER -->
 <div class="cta-banner">
-  <h2>오늘부터 매일 아침이 달라집니다</h2>
-  <p>책 읽을 시간이 없어도 괜찮습니다. 잠깐서봐가 대신 읽어드립니다.</p>
-  <a href="#pricing" class="btn-light">지금 시작하기 →</a>
+  <h2>내일 아침, 관계를 위한 첫 3분</h2>
+  <p>짧게 읽고, 나의 상황을 돌아보고, 오늘 한 가지를 시도해보세요.</p>
+  <a href="#sample" class="btn-light">인간관계 샘플 다시 보기 →</a>
 </div>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
